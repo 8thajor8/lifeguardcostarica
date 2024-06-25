@@ -2,57 +2,48 @@
 
 namespace MVC;
 
-class Router{
+class Router
+{
+    public array $getRoutes = [];
+    public array $postRoutes = [];
 
-    public $rutasGET = [];
-    public $rutasPOST = [];
-    
-    public function get($url, $fn){
-        $this->rutasGET[$url] = $fn;
-    }
-    
-    public function post($url, $fn){
-        $this->rutasPOST[$url] = $fn;
+    public function get($url, $fn)
+    {
+        $this->getRoutes[$url] = $fn;
     }
 
+    public function post($url, $fn)
+    {
+        $this->postRoutes[$url] = $fn;
+    }
 
-    public function comprobarRutas(){
-
-        session_start();
-
-        $auth = $_SESSION['login'] ?? NULL ;
-
-        $rutas_protegidas = [];
-
-        if (isset($_SERVER['PATH_INFO'])) {
-            $urlActual = $_SERVER['PATH_INFO'] ?? '/';
-        } else {
-            $urlActual = $_SERVER['REQUEST_URI'] === '' ? '/' : $_SERVER['REQUEST_URI'];
-        }
-         
-        $metodo = $_SERVER['REQUEST_METHOD'];
+    public function comprobarRutas()
+    {
         
-        if($metodo === 'GET'){
-            $fn = $this->rutasGET[$urlActual] ?? NULL;
-        } else{
-            $fn = $this->rutasPOST[$urlActual] ?? NULL;
+        // Proteger Rutas...
+        //session_start();
+
+        // Arreglo de rutas protegidas...
+        // $rutas_protegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
+
+        // $auth = $_SESSION['login'] ?? null;
+
+        $currentUrl = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
+        $method = $_SERVER['REQUEST_METHOD'];
+
+        if ($method === 'GET') {
+            $fn = $this->getRoutes[$currentUrl] ?? null;
+        } else {
+            $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
-        if(in_array($urlActual, $rutas_protegidas) && !$auth){
 
-            header( 'Location: /');
+        if ( $fn ) {
+            // Call user fn va a llamar una función cuando no sabemos cual sera
+            call_user_func($fn, $this); // This es para pasar argumentos
+        } else {
+            echo "Página No Encontrada o Ruta no válida";
         }
-
-        if($fn){
-            //La URL existe
-            
-            call_user_func($fn,$this);
-
-        } else{
-            echo "La pagina no existe";
-        }
-       
-
     }
 
     public function render($view, $datos = []){
