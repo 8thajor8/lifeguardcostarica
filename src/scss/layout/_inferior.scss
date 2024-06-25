@@ -1,0 +1,74 @@
+.background-servicios{
+    background-image: url(../img/beachbackground2.svg);
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    padding: 2.5rem 2.5rem;
+    position: relative;
+    
+    
+}
+
+@include tablet{
+    .seccion-inferior{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 2rem;
+        position: relative;
+        h2,h3{
+            color:$blanco;
+            font-weight: $bold;
+        }
+    }
+}
+
+
+
+.service{
+    margin-bottom: 6rem;
+
+    @include tablet{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        column-gap: 2rem;
+    }
+    &:last-of-type{
+        margin-bottom: 0;
+    }
+}
+
+.informacion-meta{
+    span{
+        color: $blanco;
+    }
+}
+
+.texto-entrada{
+    .descripcion{
+        font-weight: $bold;
+    }
+    a{
+        color: $negro;
+        display: block;
+        margin-top: 2rem;
+        @include tablet{
+            margin-top: 0;
+        }
+    }
+    h4{
+        margin: 0;
+        line-height: 1.4;
+
+        &::after{
+            content:'';
+            display: block;
+            width: 15rem;
+            height: .5rem;
+            background-color: $azul;
+            margin-top: 1rem;
+        }
+    }
+    
+}
+

@@ -1,0 +1,100 @@
+@include tablet{
+    .contenedor-clinicas{
+        @include grid(3, 2rem);
+    }
+}
+
+.index-clinicas{
+    background-image: url(../img/beachbackground.svg);
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    padding: 2.5rem 4rem;
+}
+
+.clinica{
+    background-color: lighten($gris, 5);
+    border: 1px solid darken($gris, 10);
+    margin-bottom: 1rem;
+    .contenido-clinica{
+        padding: 4rem;
+        h3, p{
+            margin: 0;
+        }
+        h3{
+            color: $azul;
+            font-weight: $bold;
+        }
+        
+    }
+}
+
+.ubicacion{
+    color: $verde;
+    font-weight: $bold;
+    font-size: 2.6rem;
+}
+
+.iconos-caracteristicas{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    max-width: 40rem;
+    justify-content: space-between;
+    li{
+        flex: 1;
+        display: flex;
+        position: relative;
+        justify-content: center;
+        &::after {
+           
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 90%; /* Position above the element */
+            padding: 5px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            pointer-events: none; /* Prevents the tooltip from being interactive */
+            z-index: 4;
+        }
+    
+        &:hover::after {
+            visibility: visible;
+            opacity: 1;
+        }
+        &.prescription::after {
+            content: "Prescriptions available";
+        }
+
+        &.xray::after {
+            content: "X-ray available";
+        }
+
+        &.airevac::after {
+            content: "Air evac available";
+        }
+        img{
+            flex: 0 0 2rem;
+            margin-right: 3rem;
+            width: 6rem;
+            cursor: pointer;
+            position: relative;
+            
+
+        }
+        
+        p{
+            font-weight: $black;
+        }
+    }
+
+}

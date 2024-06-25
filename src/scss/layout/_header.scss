@@ -1,0 +1,78 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3); // Adjust the transparency as needed
+    z-index: 0;
+  }
+
+
+.header{
+    background-color: transparent;
+    padding: 1rem 0 0 0;
+    position: relative;
+    background-color: rgba(68, 6, 182, 0.705);
+    .video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 70rem;
+        width: 100%;
+        overflow: hidden;
+        z-index: 0;
+    
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 70rem;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(60%); // Adjust the brightness if necessary
+        }
+    }
+    
+    &.inicio{
+        background-position: center center;
+        background-size: cover;
+        background-color: transparent;
+        @include tablet{
+            min-height: 70rem;
+        }
+
+        .contenido-header{
+            @include tablet{
+                min-height: 70rem;
+            }
+
+        }
+    }
+}
+
+.contenido-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 3rem;
+    
+
+    h1{
+        text-align: left;
+        color: $blanco;
+        font-weight: bold;
+        line-height: 2;
+        max-width: 60rem;
+        padding-left: 2rem;
+        @include tablet{
+            padding-left: 0;
+        }
+    }
+}
+

@@ -1,0 +1,66 @@
+@include tablet{
+    .contenedor-boxes{
+        margin: 8rem 0;
+        @include grid(3, 4rem);
+    }
+}
+
+.box {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    .box-header {
+        background-color: $azul;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+
+        .box-icon {
+            margin-right: 10px;
+            color: $blanco;
+            font-size: 2rem;
+        }
+
+        .box-title {
+            margin: 0;
+            font-size: 2.5rem;
+            color: $blanco;
+            font-weight: $bold;
+        }
+    }
+
+    .box-body {
+       
+
+        .config-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            .config-item {
+                padding: 1.5rem;
+                font-size: 16px;
+                color: #333;
+
+                a {
+                    text-decoration: none;
+                    color: #333;
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+                &:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+
+                &:nth-child(odd) {
+                    background-color: #eaeaea;
+                }
+            }
+        }
+    }
+}

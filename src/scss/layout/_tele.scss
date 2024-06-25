@@ -1,0 +1,47 @@
+.no-webp .imagen-tele{
+    background-image: url('../img/telehealthbackground.jpg');
+}
+.webp .imagen-tele{
+    background-image: url('../img/telehealthbackground.webp');
+}
+
+
+.separator{
+    background-position: center center;
+    background-size: cover;
+    padding: $separacion 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6); // Adjust the transparency as needed
+        z-index: 1;
+    }
+    .contenido-separator{
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        
+        h2{
+            font-size: 4rem;
+            font-weight: $black;
+            color: $blanco;
+        }
+        p{
+            font-size: 2.2rem;
+            color: $blanco;
+            margin: 0 5rem;
+            @include tablet{
+                margin: 0 25rem;
+            }
+        }
+    }
+    
+}

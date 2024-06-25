@@ -1,0 +1,30 @@
+
+
+.transportation{
+    padding-top: 2rem;
+    @include tablet{
+        padding-top: 0;
+    }
+}
+
+
+@include tablet{
+    .iconos-transportation{
+        @include grid(3, 2rem);
+    }
+}
+
+
+.icono{
+    text-align: center;
+    margin-bottom: 5rem;
+    img{
+        height: 20rem;
+        
+    }
+    h3{
+        text-transform: uppercase;
+        color: lighten($azul,10%);
+        font-weight: $black;
+    }
+}

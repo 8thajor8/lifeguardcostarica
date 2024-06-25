@@ -1,0 +1,43 @@
+.alerta{
+    padding: .5rem;
+    text-align: center;
+    color: $blanco;
+    font-weight: $bold;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    border-radius: 1rem;
+    text-shadow: 1px 1px 2px $negro ;
+    &.error{
+        background-color: $rojo;
+    }
+    &.exito{
+        background-color: $verde;
+    }
+    &.act{
+        background-color: $amarillo;
+    }
+}
+
+table.listados{
+    margin-top: 4rem;
+    width: 100%;
+    border-spacing: 0;
+    thead{
+        background-color: $azul;
+        th{
+            color: $blanco;
+            padding: 2rem;
+        }
+    }
+    .imagen-tabla{
+        width: 10rem;
+    }
+    td{
+        text-align: center;
+    }
+}
+
+.imagen-small{
+    width: 20rem;
+}
+

@@ -1,0 +1,26 @@
+.no-webp .imagen-contact{
+    background-image: url('../img/contactus.jpg');
+}
+.webp .imagen-contact{
+    background-image: url('../img/contactus.webp');
+}
+
+
+.imagen-contact{
+
+    .contenido-separator{
+        
+        a{
+            color: $blanco;
+            margin-bottom: 3rem;
+           
+        }
+        p{
+            a{
+                &:hover{
+                    color: $rojo;
+                }
+            }
+        }
+    }
+}

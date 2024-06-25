@@ -1,0 +1,26 @@
+@import 'base/normalize';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/globales';
+@import 'base/utilidades';
+@import 'base/botones';
+
+/** UI **/
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/navegacion';
+@import 'layout/iconos';
+@import 'layout/clinicas';
+@import 'layout/tele';
+@import 'layout/xray';
+@import 'layout/inferior';
+@import 'layout/testimoniales';
+@import 'layout/contact';
+@import 'layout/aboutus';
+@import 'layout/clinicas-site';
+
+//Admin
+@import 'layout/admin/configuracion';
+@import 'layout/admin/listados';
+@import 'layout/admin/formularios';
+

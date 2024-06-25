@@ -1,0 +1,72 @@
+#aboutus {
+    
+    background: #ffffff;
+    margin: 20px auto;
+    @include tablet{
+        padding: 2rem;
+    }
+
+}   
+
+    .content {
+        @include tablet{
+            display: flex;
+            align-items: center;   
+        }
+        margin-bottom: 5rem;
+        
+            &.odd {
+                .image {
+                    order: 2;
+                }
+                .text {
+                    order: 1;
+                    @include tablet{
+                        margin-left: 20px;
+                    }
+                }
+            }
+
+            &.even {
+                .text {
+                    order: 2;
+                    @include tablet{
+                        margin-right: 20px;
+                    }
+                }
+                .image {
+                    order: 1;
+                }
+            }
+        
+
+        .text {
+            flex: 1;
+            color: #555555;
+            @include tablet{
+                padding: 1rem 2rem;
+            }
+            p {
+                margin-bottom: 20px;
+            }
+        }
+
+        .image {
+            flex: 1;
+            
+
+            picture{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            img {
+                width: 100%;
+                max-width: 40rem;
+                
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+

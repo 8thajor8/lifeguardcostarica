@@ -1,0 +1,31 @@
+.clinicas-background{
+    position: relative;
+    background-image: url(../img/beachbackground3.svg);
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: stretch;
+    background-repeat: no-repeat; 
+    padding: 2.5rem 4rem;
+    
+    margin: 0;
+    width: 100%;
+    .clinicas-tittle{
+        
+        color: $blanco;
+        font-weight: $bold;
+        padding: 2.5rem 0;
+        margin: 0;
+    }
+    
+    .header{
+        background-color: rgba(45, 44, 44, 0.7);
+        box-shadow: .1rem .2rem .3rem #333;
+        z-index: 3;
+        padding-top: 0;
+        .contenido-header{
+            padding: .5rem;
+            padding-right: 1rem;
+        }
+    }
+}
+

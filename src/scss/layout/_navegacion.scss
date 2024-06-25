@@ -1,0 +1,85 @@
+.barra{
+    img{
+        width: 20rem;
+    }
+    .active{
+        color: $rojo;
+    }
+    display: flex;
+    flex-direction: column;
+    .barra-interna{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+    }
+    @include tablet{
+        flex-direction: row;
+        justify-content: space-between;
+        &.fixed{
+            position: fixed;
+            z-index: 3;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: rgba(68, 6, 182, 0.705);
+            box-shadow: .1rem .2rem .3rem #333;
+            padding: .5rem;
+            padding-right: 1rem;
+            img{
+                width: 20rem;
+            }
+        
+        }
+    }
+}
+
+.navegacion{
+    visibility: hidden;
+    
+    opacity: 0;
+    transition: visibility 0.5s ease-in-out, opacity .5s ease-in-out;
+    @include tablet{
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        visibility: visible;
+    }
+    a{
+        color: $blanco;
+        text-decoration: none;
+        
+        font-size: 2rem;
+        font-weight: $bold;
+        display: block;
+        text-align: center;
+        @include tablet{
+            margin-right: 3rem;
+            font-size: 1.8rem;
+            &:last-of-type{
+                margin-right: 0;
+            }
+            &:hover{
+                color: $rojo;
+            }
+        }
+    }
+}
+
+.mobile-menu{
+    margin-bottom: 1rem;
+    @include tablet{
+        display: none;
+        
+    }
+    img{
+        width: 5rem;
+    }
+
+}
+
+.mostrar{
+    visibility: visible;
+    
+    opacity: 1;
+}
