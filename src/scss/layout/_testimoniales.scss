@@ -1,12 +1,19 @@
 .testimoniales{
-    position: sticky;
-    top: 0;
+    position: relative;
     height: 100vh;
+    @include tablet{
+        position: sticky;
+        top: 100px;
+        
+
+    }
+    
 }
 
 .testimoniales-container {
-    position: relative;
+    
     width: 100%;
+    
     
     
 }

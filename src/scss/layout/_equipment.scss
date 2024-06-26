@@ -22,9 +22,13 @@
         
     }
     .intro {
-      position: sticky;
+      @include tablet{
+        position: sticky;
       top: 100px;
       height: 70vh;
+
+      }
+      
       margin-bottom: 2rem;
       
       h2 {
