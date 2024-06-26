@@ -10,6 +10,7 @@ function iniciarApp(){
         scrollNav();
         restaltarEnlace();
         testimonialSlider();
+        accordion();
     }
     
 }
@@ -62,6 +63,7 @@ function restaltarEnlace (){
             if(window.scrollY >= (sectionTop - sectionHeight /3 )){
                 
                 actual = section.id;
+                
                 
             }
             
@@ -118,4 +120,18 @@ function testimonialSlider(){
 
     showTestimonial(currentIndex);
     setInterval(nextTestimonial, 5000);
+}
+
+function accordion(){
+    
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+          item.querySelector('.item-tittle-container').addEventListener('click', () => {
+            
+            item.classList.toggle('active');
+            item.querySelector('.accordion-content').classList.toggle('active');
+          });
+        });
+      
 }

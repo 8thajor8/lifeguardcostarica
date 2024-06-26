@@ -17,7 +17,7 @@
         column-gap: 2rem;
         position: relative;
         h2,h3{
-            color:$blanco;
+            
             font-weight: $bold;
         }
     }
@@ -40,7 +40,8 @@
 
 .informacion-meta{
     span{
-        color: $blanco;
+        color: $rojo;
+        font-weight: $bold;
     }
 }
 

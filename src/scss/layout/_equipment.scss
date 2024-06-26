@@ -1,0 +1,111 @@
+#technology {
+  background-image: url(../img/lightbackground.svg);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat; 
+    .seccion{
+        margin: 0 auto;
+        max-width: 120rem;
+        width: 95%;
+        padding: 5rem 2.5rem;
+        position: relative;
+        @include tablet{
+          
+              display: grid;
+              grid-template-columns: 2fr 1fr;
+              column-gap: 4rem;
+              position: relative;
+              
+          
+      }
+        
+    }
+    .intro {
+      position: sticky;
+      top: 100px;
+      height: 70vh;
+      margin-bottom: 2rem;
+      
+      h2 {
+        font-size: 3rem;
+        color: $azul;
+        font-weight: $bold;
+        margin-bottom: 1rem;
+      }
+      p {
+        text-align: center;
+        color: $negro;
+      }
+    }
+    .accordion {
+      .accordion-item {
+        margin-bottom: 1rem;
+        .item-tittle-container{
+          display: flex;
+          border-bottom: solid 1px $azul;
+          align-items: center;
+          cursor: pointer;
+          &:hover{
+            background-color: $gris;
+          }
+          h3 {
+            color: $azul;
+            font-size: 2rem;
+            text-align: left;
+            font-weight: $bold;
+            padding: 0.75rem;
+            margin-right: 2rem;
+          }
+          img{
+            width: 50px;
+            height: 50px;
+          }
+        }
+        
+        .accordion-content {
+         .equipment-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            img {
+              width: 150px;
+              height: 150px;
+              margin-right: 1rem;
+              border-radius: 8px;
+            }
+            .description {
+                
+                @include tablet{
+                    width: 35rem;
+                }
+                
+              h4 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+                color: $azul;
+              }
+              p {
+                font-size: 1.5rem;
+                color: $negro;
+              }
+            }
+          }
+        }
+      }
+    }
+}
+  
+
+.accordion-content{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+    
+}
+  // Additional styles for accordion functionality
+  .accordion .accordion-item.active .accordion-content {
+    
+    max-height: 9000px;
+    
+  }

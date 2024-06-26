@@ -1,5 +1,10 @@
 @include tablet{
     .contenedor-clinicas{
+        @include grid(2, 2rem);
+    }
+}
+@include desktop{
+    .contenedor-clinicas{
         @include grid(3, 2rem);
     }
 }
@@ -10,7 +15,11 @@
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat; 
-    padding: 2.5rem 4rem;
+    padding: 2.5rem 0.5rem;
+    @include tablet{
+        padding: 2.5rem 4rem;
+    }
+   
 }
 
 .clinica{
@@ -97,4 +106,9 @@
         }
     }
 
+}
+
+.contenedor-clinicas{
+
+    width: 100%;
 }

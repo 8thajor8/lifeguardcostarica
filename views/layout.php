@@ -59,11 +59,12 @@
 
                 <nav class="navegacion navegacion-index">
                     <a href="<?php echo $inicio ? "#telemedicine" : "/#telemedicine" ?>">Telemedicine Now</a>
+                    <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>">About Us</a>
+                    <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>">Medical Technology</a>
                     <a href="<?php echo $inicio ? "#clinicas" : "#" ?>">Our Clinics</a>
+                    <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>">Contact</a>
                     <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>">Services</a>
                     
-                    <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>">Contact</a>
-                    <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>">About Us</a>
                 </nav>
                 
             </div>
@@ -78,11 +79,14 @@
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
                 <a href="<?php echo $inicio ? "#telemedicine" : "/#telemedicine" ?>">Telemedicine Now</a>
+                <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>">About Us</a>
+                <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>">Medical Technology</a>
                 <a href="<?php echo $inicio ? "#clinicas" : "#" ?>">Our Clinics</a>
-                <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>">Services</a>
+                
                 
                 <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>">Contact</a>
-                <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>">About Us</a>
+                <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>">Services</a>
+                
             </nav>
         </div>
         <p class="copyright">Todos los derechos reservados 2024 &copy;</p>
