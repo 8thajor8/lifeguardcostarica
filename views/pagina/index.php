@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="text">
+            <div class="text text-bottom">
                 <p>At LifeGuard Costa Rica, our mission is to ensure that you receive the highest standard of care and support, no matter the circumstance. Discover the difference with our dedicated team and comprehensive services.</p>
             </div>
 
@@ -297,12 +297,39 @@
         </section>
                         
 
-        <section class="separator imagen-xray">
+        <section class="separator-xray">
             <div class="overlay"></div>
-            <div class="contenido-separator">
+            <div class="contenido-xray">
                 <h2>X-RAY IMAGING</h2>
-                <p>Experience cutting-edge X-ray technology with minimal radiation exposure at LifeGuard Costa Rica. Across multiple locations, we offer convenient portable X-ray services, bringing our advanced imaging capabilities directly to you</p>
-                <a href="https://wa.me/50685129111" target="_blank" class="boton-amarillo">Get Booked</a>
+                <div class="contenedor-xray right">
+                    <div class="contenedor-texto-xray">
+                        <p>At LifeGuard Costa Rica, we understand the importance of having radiology services available in remote areas of Costa Rica, where trauma accidents are more common. For this reason, we have portable radiology equipment that can be used both at home and in clinics, ensuring quick and accurate diagnostics in any location.</p>
+
+                        <p>We offer 24-hour radiology services, ensuring that our services are available whenever you need them. At LifeGuard Costa Rica, we are committed to providing comprehensive and accessible care, supported by advanced technology and a highly trained team.</p>
+                    </div>
+                    
+
+                    <div class="contenedor-imagen-xray">
+                        <img src="./build/img/portablexray.webp" alt="portable xray">
+                    </div>
+                </div>
+                <div class="contenedor-xray left">
+                    <div class="contenedor-texto-xray">
+                        <p>Our medical team consists of professionals graduated in imaging, not just radiology, ensuring a broad and specialized knowledge in the interpretation of medical images. We use state-of-the-art digital radiology equipment, which provides clear and detailed visualization, facilitating accurate diagnoses and appropriate treatments. Additionally, our equipment uses the minimum required radiation dose to make the study viable, correct, and useful, without harming the patient.</p>
+
+                        <div class="contenedor-boton">
+                            <a href="https://wa.me/50685129111" target="_blank" class="boton-amarillo">Get Booked</a>
+                        </div>
+                    </div>
+                    <div class="contenedor-imagen-xray">
+                        <img src="./build/img/xraybackground.webp" alt="xray">
+                    </div>
+
+                    
+                </div>
+                
+                
+                
             </div>
         </section>
 

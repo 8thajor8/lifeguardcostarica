@@ -11,11 +11,11 @@
         padding: 5rem 2.5rem;
         position: relative;
         @include tablet{
-          
-              display: grid;
-              grid-template-columns: 2fr 1fr;
-              column-gap: 4rem;
-              position: relative;
+            padding: 4rem 2.5rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            column-gap: 4rem;
+            position: relative;
               
           
       }
@@ -25,7 +25,7 @@
       @include tablet{
         position: sticky;
       top: 100px;
-      height: 70vh;
+      height: 50vh;
 
       }
       

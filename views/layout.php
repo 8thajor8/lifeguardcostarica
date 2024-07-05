@@ -69,7 +69,7 @@
                 
             </div>
 
-            <?php echo $inicio ? "<h1>24/7 Urgent Care, Evacuations and Telemedicine Consultations</h1>" : "" ?>
+            <?php echo $inicio ? "<div class='titulo-header'><h1>24/7 Urgent Care, Evacuations and Telemedicine Consultations</h1></div>" : "" ?>
         </div>
     </header>
 

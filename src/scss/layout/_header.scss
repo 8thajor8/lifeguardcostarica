@@ -41,11 +41,13 @@
         background-position: center center;
         background-size: cover;
         background-color: transparent;
+        height: 100vh;
         @include tablet{
             min-height: 70rem;
         }
 
         .contenido-header{
+            height: 100%;
             @include tablet{
                 min-height: 70rem;
             }
@@ -61,17 +63,22 @@
     position: relative;
     z-index: 1;
     padding-bottom: 3rem;
-    
-
-    h1{
-        text-align: left;
-        color: $blanco;
-        font-weight: bold;
-        line-height: 2;
-        max-width: 60rem;
-        padding-left: 2rem;
-        @include tablet{
-            padding-left: 0;
+    @include tablet{
+        padding-bottom: 0;
+    }
+    .titulo-header{
+        h1{
+            text-align: left;
+            color: $blanco;
+            font-weight: bold;
+            line-height: 2;
+            max-width: 60rem;
+            padding-left: 2rem;
+            font-size: 2.3rem;
+            @include tablet{
+                padding-left: 0;
+                font-size: 3.8rem;
+            }
         }
     }
 }

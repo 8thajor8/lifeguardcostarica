@@ -1,7 +1,70 @@
-.no-webp .imagen-xray{
-    background-image: url('../img/xraybackground.jpg');
-}
-.webp .imagen-xray{
-    background-image: url('../img/xraybackground.webp');
-}
 
+
+.contenido-xray{
+    background-image: url(../img/lightbackground.svg);
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    
+    h2{
+        margin: 0;
+        padding: 2rem;
+        color: #0f3973;
+        font-size: 3rem;
+        font-weight: 700;
+        
+    }
+
+    .contenedor-xray{
+        background-color: black;
+        text-align: center;
+        p{
+            padding: 2rem;
+            color: $blanco;
+            font-size: 1.8rem;
+            line-height: 2;
+            margin: 0;
+            @include tablet{
+                text-align: right;
+            }
+        }
+        @include tablet{
+            display: flex;
+            .contenedor-texto-xray,
+            .contenedor-imagen-xray{
+                width: 50%;
+            }
+            .contenedor-texto-xray{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0 5rem;
+            }
+            &.left{
+                .contenedor-imagen-xray{
+                    order: 1;
+                }
+                .contenedor-texto-xray{
+                    order: 2;
+                    p{
+                        text-align: left;
+                    }
+                }
+            }
+        }
+        .contenedor-imagen-xray{
+            img{
+                height: 100%;
+            }
+        }
+        
+    }
+    .contenedor-boton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 3rem;
+    }
+}
