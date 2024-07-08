@@ -104,8 +104,74 @@
         </div>
 
     </section>
+
+    <section id="insurers">
+        <div class="contenedor fixed-scroll insurers">
+                <h2 class="section-headline">LifeGuard For Insurers</h2>
+
+                <div class="iconos-insurers">
+                    <div class="icono">
+                        <img src="/build/img/luggage.svg" alt="icono luggage" loading="lazy">
+                        <h3>Luggage Insurance</h3>
+                        <p>Coverage for lost, damaged, or stolen luggage during travel. Reimbursment of the cost of your belongings</p>
+                    </div>
+                    <div class="icono">
+                        <img src="/build/img/planeicon.svg" alt="icono airevac" loading="lazy">
+                        <h3>Repatriation Services</h3>
+                        <p>Return of individuals to their home country in the event of a medical emergency or death while abroad</p>
+                    </div>
+                    <div class="icono">
+                        <img src="/build/img/worldcare.svg" alt="icono worldwide" loading="lazy">
+                        <h3>Worldwide Coverage</h3>
+                        <p>We service insurance companies all around the world</p>
+                    </div>
+                </div>
+
+                <div class="iconos-insurers below">
+                    <div class="icono">
+                        <img src="/build/img/car.svg" alt="icono money" loading="lazy">
+                        <h3>VIP Transportation</h3>
+                        <p>Ground, air and sea transportation services available anywhere, anytime.</p>
+                    </div>
+                    <div class="icono">
+                        <img src="/build/img/guarded.svg" alt="icono ground evac" loading="lazy">
+                        <h3>Personalized Services</h3>
+                        <p>From cash advance to hotel and airline bookings, Lifeguard can take care of all of your subscriber's inquiries.</p>
+                    </div>
+                </div>
+
+        </div>
+    </section>
     
         
+    <section class="separator insurer-separator">
+        
+       <div class="overlay"></div>
+            <div class="iconos-separator">
+                
+                <div class="icono">
+                    
+                    <h3>+30,000 Cases Served</h3>
+                    <p>Availability in the most remote and touristic locations in CR</p>
+                </div>
+
+                <div class="icono">
+                    
+                    <h3>Extensive Fleet</h3>
+                    <p>X ALS Ambulances</p>
+                    <p>X Boat Ambulances</p>
+                    <p>X ALS Planes</p>
+                    <p>X Evac Helicopters</p>
+                </div>
+                <div class="icono">
+                    <h3>24/7 Availability</h3>
+                    <p>Open every day, at every hour, 365 days a year</p>
+                </div>
+            </div>
+        
+        
+    </section>
+
         <section id="technology" class="highlight">
            
             <div class=" seccion container">
@@ -298,7 +364,7 @@
                         
 
         <section class="separator-xray">
-            <div class="overlay"></div>
+            
             <div class="contenido-xray">
                 <h2>X-RAY IMAGING</h2>
                 <div class="contenedor-xray right">
@@ -368,9 +434,10 @@
         </section>
 
         <section id="servicios" class="highlight">
+            
             <div class="background-servicios ">
                         
-
+            <div class="overlay"></div>
                 <div class="contenedor  seccion-inferior">
                     <section class="blog">
                         <h2>Services</h2>

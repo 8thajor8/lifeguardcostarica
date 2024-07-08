@@ -1,23 +1,38 @@
+#servicios{
+    position: relative;
+    .overlay{
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+}
+
 .background-servicios{
     background-image: url(../img/beachbackground2.svg);
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat; 
-    padding: 2.5rem 2.5rem;
+    padding: 2.5rem 0;
     position: relative;
+    z-index: 2;
+    @include tablet{
+        padding: 2.5rem;
+    }
     
     
 }
 
-@include tablet{
+
     .seccion-inferior{
+        position: relative;
+        z-index: 2;
+        @include tablet{
         display: grid;
         grid-template-columns: 2fr 1fr;
         column-gap: 2rem;
-        position: relative;
+        
         h2,h3{
-            
+            color: $blanco;
             font-weight: $bold;
         }
     }
@@ -26,9 +41,10 @@
 
 
 .service{
+    
     margin-bottom: 4rem;
     padding: 2rem;
-    background-color: rgb(0 0 0 / 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: .8rem;
     
     @include tablet{
@@ -47,7 +63,7 @@
 
 .informacion-meta{
     span{
-        color: $rojo;
+        color: darken($verde, 10%);
         font-weight: $bold;
     }
 }
@@ -55,7 +71,7 @@
 .texto-entrada{
     .descripcion{
         font-size: 1.7rem;
-        color: $gris;
+        color: darken($gris, 70%);
         font-weight: $bold;
     }
     a{
@@ -69,7 +85,9 @@
     h4{
         margin: 0;
         line-height: 1.4;
-
+        font-weight: $bold;
+        color: darken($azul, 5%);
+        margin-top: 1.5rem;
         &::after{
             content:'';
             display: block;

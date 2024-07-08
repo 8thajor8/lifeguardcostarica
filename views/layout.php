@@ -41,7 +41,7 @@
                 <source src="/build/img/video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <div class="overlay"></div>
+            
         </div> <?php } ?>
         <div class="contenedor contenido-header">
             <div class="barra">

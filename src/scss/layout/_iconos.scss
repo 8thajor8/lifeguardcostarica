@@ -1,9 +1,9 @@
 
 
 .transportation{
-    padding-top: 2rem;
+    padding: 2rem;
     @include tablet{
-        padding-top: 0;
+        padding: 0;
     }
 }
 

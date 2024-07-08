@@ -35,16 +35,26 @@
     blockquote{
         padding-left: 3rem;
         position: relative;
+        margin: 1rem 0;
+        @include tablet{
+            margin: 1rem 2rem;
+        }
         &::before{
             content: '';
             background-image: url(../img/comilla.svg);
             background-repeat: no-repeat;
-            width: 6rem;
-            height: 8rem;
+            width: 3rem;
+            height: 4rem;
             display: block;
             position: absolute;
-            top: -2rem;
-            left: -3rem;
+            top: 0;
+            left: 0rem;
+            @include tablet{
+                width: 5rem;
+                height: 7rem;
+                top: -2rem;
+                left: -3rem;
+            }
         }
     }
     p{

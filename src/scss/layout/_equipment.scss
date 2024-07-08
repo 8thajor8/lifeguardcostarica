@@ -8,7 +8,7 @@
         margin: 0 auto;
         max-width: 120rem;
         width: 95%;
-        padding: 5rem 2.5rem;
+        padding: 5rem 0rem;
         position: relative;
         @include tablet{
             padding: 4rem 2.5rem;
@@ -46,6 +46,7 @@
       .accordion-item {
         margin-bottom: 1rem;
         .item-tittle-container{
+
           display: flex;
           border-bottom: solid 1px $azul;
           align-items: center;
@@ -70,7 +71,15 @@
         .accordion-content {
          .equipment-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
+           margin-top: 1.5rem;
+            @include tablet{
+              flex-direction: row;
+              align-items: center;
+              margin-top: 0;
+            }
+            
             margin-bottom: 1rem;
             img {
               width: 150px;
@@ -79,17 +88,27 @@
               border-radius: 8px;
             }
             .description {
-                
+                text-align: center;
                 @include tablet{
                     width: 35rem;
+                    text-align: left;
                 }
                 
               h4 {
+                margin-top: 0.3rem;
+                @include tablet{
+                  margin-top: 1rem;
+                }
+                
                 font-size: 1.8rem;
                 margin-bottom: 0.5rem;
                 color: $azul;
               }
               p {
+                margin: 0 0 1rem 0 ;
+                @include tablet{
+                  margin: 1rem 0 ;
+                }
                 font-size: 1.5rem;
                 color: $negro;
               }
