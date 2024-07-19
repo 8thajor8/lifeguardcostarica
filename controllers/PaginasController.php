@@ -7,6 +7,7 @@ use Model\Servicio;
 use Model\Testimonial;
 
 
+
 class PaginasController{
 
     public static function index(Router $router){
@@ -36,6 +37,8 @@ class PaginasController{
         $router->render('admin/configuracion');
 
     }
+
+    
 
     
 

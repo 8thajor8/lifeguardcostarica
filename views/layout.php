@@ -42,7 +42,11 @@
                 Your browser does not support the video tag.
             </video>
             
-        </div> <?php } ?>
+            <?php echo $inicio ? "<div class='titulo-header'><h1>24/7 Urgent Care, Evacuations and Telemedicine Consultations</h1></div>" : "" ?>
+        </div>
+        
+        
+        <?php } ?>
         <div class="contenedor contenido-header">
             <div class="barra">
                 
@@ -58,18 +62,17 @@
                 </div>
 
                 <nav class="navegacion navegacion-index">
-                    <a href="<?php echo $inicio ? "#telemedicine" : "/#telemedicine" ?>">Telemedicine Now</a>
-                    <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>">About Us</a>
-                    <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>">Medical Technology</a>
-                    <a href="<?php echo $inicio ? "#clinicas" : "#" ?>">Our Clinics</a>
-                    <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>">Contact</a>
-                    <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>">Services</a>
+                    <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>" class="scroll">About Us</a>
+                    <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>" class="scroll">Medical Technology</a>
+                    <a href="<?php echo $inicio ? "#clinicas" : "#" ?>" class="scroll">Our Clinics</a>
+                    <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>" class="scroll">Services</a>
+                    <a href="/login">Log In</a>
                     
                 </nav>
                 
             </div>
 
-            <?php echo $inicio ? "<div class='titulo-header'><h1>24/7 Urgent Care, Evacuations and Telemedicine Consultations</h1></div>" : "" ?>
+            
         </div>
     </header>
 
@@ -78,14 +81,15 @@
     <footer class="footer ">
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
-                <a href="<?php echo $inicio ? "#telemedicine" : "/#telemedicine" ?>">Telemedicine Now</a>
-                <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>">About Us</a>
-                <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>">Medical Technology</a>
-                <a href="<?php echo $inicio ? "#clinicas" : "#" ?>">Our Clinics</a>
+                <a href="<?php echo $inicio ? "#telemedicine" : "/#telemedicine" ?>" class="scroll">Telemedicine Now</a>
+                <a href="<?php echo $inicio ? "#aboutus" : "/#aboutus" ?>" class="scroll">About Us</a>
+                <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>" class="scroll">Medical Technology</a>
+                <a href="<?php echo $inicio ? "#clinicas" : "#" ?>" class="scroll">Our Clinics</a>
                 
                 
-                <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>">Contact</a>
-                <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>">Services</a>
+                <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>" class="scroll">Contact</a>
+                <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>" class="scroll">Services</a>
+                <a href="/login">Log In</a>
                 
             </nav>
         </div>

@@ -1,0 +1,48 @@
+.login-container{
+    position: relative;
+    background-image: url('../img/lightbackground.svg');
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    margin: 0;
+
+
+    .login{
+        
+        width: 95%;
+        max-width: 768px;
+        padding: 5rem;
+        margin: 0 auto;
+        
+        .descripcion-pagina{
+            text-align: center;
+            font-size: 3rem;
+            font-weight: $black;
+        }
+        input[type="submit"]{
+            @include boton($azul, $blanco)
+        }
+        .formulario-login{
+            margin: 10rem 0;
+            .campo{
+                display: flex;
+                align-items: center;
+                margin-bottom: 2rem;
+            }
+            label{
+                flex: 0 0 10rem;    
+        
+            }
+            input:not([type="submit"])  {
+                flex: 1;
+                padding: 1rem;
+                border: none;
+                background-color: $gris;
+                border-radius: .5rem;
+            }
+            
+        }
+        
+    }
+}

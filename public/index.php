@@ -7,6 +7,8 @@ use Controllers\PaginasController;
 use Controllers\ClinicasController;
 use Controllers\ServiciosController;
 use Controllers\TestimonialsController;
+use Controllers\UsuariosController;
+
 
 
 
@@ -17,7 +19,14 @@ $router->get('/', [PaginasController::class, 'index']);
 $router->get('/clinicas', [PaginasController::class, 'clinicas']);
 
 //Admin
+
 $router->get('/configuracion', [PaginasController::class, 'configuracion']);
+
+//Usuarios
+$router->get('/login', [UsuariosController::class, 'login']);
+$router->post('/login', [UsuariosController::class, 'login']);
+$router->get('/usuarios/crear', [UsuariosController::class, 'crear']);
+$router->post('/usuarios/crear', [UsuariosController::class, 'crear']);
 
 //Clinicas
 $router->get('/clinicas/listado', [ClinicasController::class, 'listado']);

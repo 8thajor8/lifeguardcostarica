@@ -60,3 +60,9 @@ function validarORedireccionar(string $url){
 
         return $id;
 }
+
+function isAuth() : void {
+    if(!isset($_SESSION['login'])) {
+        header('Location: /');
+    }
+}

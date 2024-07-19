@@ -26,7 +26,7 @@
             </div>
             <div class="box-body">
                 <ul class="config-list">
-                    <li class="config-item"><a href="#">Usuarios</a></li>
+                    <li class="config-item"><a href="/usuarios/crear">Usuarios</a></li>
                     
                     <!-- Add more configuration options here -->
                 </ul>

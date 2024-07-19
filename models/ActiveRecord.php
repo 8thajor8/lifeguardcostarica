@@ -44,6 +44,11 @@ class ActiveRecord{
         
         $resultado = self::$db->query($query);
 
+        return [
+            'resultado' =>  $resultado,
+            'id' => self::$db->insert_id
+         ];
+
         
         
     }
@@ -153,10 +158,14 @@ class ActiveRecord{
     public static function find($id){
         $query = "SELECT * FROM " . static::$tabla . " WHERE id = $id ";
         $resultado = self::consultarSQL($query);
-        
-        
-        
         return array_shift($resultado); //uso array shift para hacer un return del primer resultado del arreglo de resultados
+    }
+
+     // Busqueda Where con Columna 
+     public static function where($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift( $resultado ) ;
     }
 
     public static function consultarSQL($query){
@@ -208,6 +217,11 @@ class ActiveRecord{
         
         
     }
+
+    public static function setAlerta($mensaje) {
+        static::$errores[] = $mensaje;
+    }
+   
 
     
 }

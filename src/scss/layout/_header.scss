@@ -10,30 +10,61 @@
 
 
 .header{
-    background-color: transparent;
+    background-color: $azul;
     padding: 1rem 0 0 0;
     position: relative;
-    background-color: rgba(68, 6, 182, 0.705);
+    
     .video-container {
         position: absolute;
         top: 0;
         left: 0;
-        min-height: 70rem;
+        height: 100%;
         width: 100%;
         overflow: hidden;
         z-index: 0;
-    
+        transition: clip-path .7s ease;
+        clip-path: inset(0 0 0 0); /* Initially fully visible */
+        display: flex;
+        align-items: end; 
+        justify-content: center;
         video {
             position: absolute;
             top: 50%;
             left: 50%;
-            min-width: 100%;
-            min-height: 70rem;
-            width: auto;
-            height: auto;
+            
+            min-height: 100%;
+            width: 103%;
+            
             transform: translate(-50%, -50%);
             object-fit: cover;
             filter: brightness(60%); // Adjust the brightness if necessary
+        }
+        .titulo-header{
+            position: relative;
+            z-index: 1;
+            
+            text-transform: uppercase;
+            h1{
+               
+                @include tablet{
+                    font-weight: $black;
+                    padding-bottom: 0;
+                    padding:0 0 10rem 2rem;
+                }
+                padding: 0 1rem 4rem 1rem;
+                
+                text-align: center;
+                color: $blanco;
+                font-weight: bold;
+                line-height: 2;
+                max-width: 80rem;
+                
+                font-size: 2.3rem;
+                @include tablet{
+                    padding-left: 0;
+                    font-size: 3.8rem;
+                }
+            }
         }
     }
     
@@ -42,6 +73,12 @@
         background-size: cover;
         background-color: transparent;
         height: 100vh;
+        width: 100%;
+        position: fixed;
+        z-index: 4;
+        top: 0;
+        left: 0;
+        
         @include tablet{
             min-height: 70rem;
         }
@@ -53,6 +90,7 @@
             }
 
         }
+        
     }
 }
 
@@ -64,29 +102,8 @@
     z-index: 1;
     padding-bottom: 3rem;
     @include tablet{
-        padding-bottom: 0;
+        padding-bottom: 1rem;
     }
-    .titulo-header{
-        h1{
-            @include tablet{
-                text-align: left;
-                padding-bottom: 0;
-                padding:0 0 2rem 2rem;
-            }
-            padding: 0 1rem 4rem 1rem;
-           
-            text-align: center;
-            color: $blanco;
-            font-weight: bold;
-            line-height: 2;
-            max-width: 60rem;
-            
-            font-size: 2.3rem;
-            @include tablet{
-                padding-left: 0;
-                font-size: 3.8rem;
-            }
-        }
-    }
+    
 }
 

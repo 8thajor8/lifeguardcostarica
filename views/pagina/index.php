@@ -1,28 +1,34 @@
-<main>
+<main class="<?php echo $inicio ? "clip" : ""; ?>">
     
-    
-    <div class="contenedor fixed-scroll transportation">
-            <h2 class="section-headline">Medical Transportation</h2>
-
-            <div class="iconos-transportation">
-                <div class="icono">
-                    <img src="/build/img/seaLogo.svg" alt="icono seadoctor" loading="lazy">
-                    <h3>Sea Doctor</h3>
-                    <p>Boat Ambulance: We have an advanced life support boat ambulance that can aid in the territorial waters of the Pacific Ocean of Costa Rica up to 80 Nautical Miles. <a href="https://sea-dr.com" target="_blank"> LEARN MORE</a></p>
-                </div>
-                <div class="icono">
-                    <img src="/build/img/airLogo.svg" alt="icono air evac" loading="lazy">
-                    <h3>Air Evacuation</h3>
-                    <p>We are dedicated to providing high-quality and compassionate ambulance and emergency medical services. We have Fixed or Rotary wing air-crafts available. Trust us to take care of you in times of need.</p>
-                </div>
-                <div class="icono">
-                    <img src="/build/img/groundLogo.svg" alt="icono ground evac" loading="lazy">
-                    <h3>Ground Ambulance</h3>
-                    <p>Emergency Ambulance Response: We can help you in your times of need! When seconds count our ambulance and doctor service will be available for you.</p>
-                </div>
-            </div>
-
+    <div class="portada">
+        <div class="overlay"></div>
     </div>
+    
+    <section class="transportation-section">
+        <div class="contenedor fixed-scroll transportation">
+                <h2 class="section-headline">Medical Transportation</h2>
+
+                <div class="iconos-transportation">
+                    <div class="icono">
+                        <img src="/build/img/seaLogo.svg" alt="icono seadoctor" loading="lazy">
+                        <h3>Sea Doctor</h3>
+                        <p>Boat Ambulance: We have an advanced life support boat ambulance that can aid in the territorial waters of the Pacific Ocean of Costa Rica up to 80 Nautical Miles. <a href="https://sea-dr.com" target="_blank"> LEARN MORE</a></p>
+                    </div>
+                    <div class="icono">
+                        <img src="/build/img/airLogo.svg" alt="icono air evac" loading="lazy">
+                        <h3>Air Evacuation</h3>
+                        <p>We are dedicated to providing high-quality and compassionate ambulance and emergency medical services. We have Fixed or Rotary wing air-crafts available. Trust us to take care of you in times of need.</p>
+                    </div>
+                    <div class="icono">
+                        <img src="/build/img/groundLogo.svg" alt="icono ground evac" loading="lazy">
+                        <h3>Ground Ambulance</h3>
+                        <p>Emergency Ambulance Response: We can help you in your times of need! When seconds count our ambulance and doctor service will be available for you.</p>
+                    </div>
+                </div>
+
+        </div>
+                        
+    </section>
     
 
     
