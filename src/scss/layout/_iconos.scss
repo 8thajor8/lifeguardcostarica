@@ -1,20 +1,91 @@
-.clip {
-    /* Push the main content below the header initially */
+.ghost-div {
+    height: 200vh; /* Height to delay scrolling */
+    background: transparent; /* Transparent background */
+    position: absolute; /* Absolute positioning to control visibility */
+    top: 0; /* Start at the top */
+    left: 0;
+    width: 100%;
+    z-index: 1; /* Ensure it's below main content */
+    opacity: 0; /* Initially hidden */
+    pointer-events: none; /* Make sure it does not interfere with interactions */
+    transition: opacity 0.3s ease; /* Smooth transition effect */
+}
+
+main{
+    position: relative;
+    
+    z-index: 1; // Ensure it's above header but below portada
+}
+
+.portada {
+    background-color: $grisOscuro; // Your desired background color
+    position: relative;
+    padding: 50px 10px; // Adjust as needed
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include tablet{
+        padding: 50px; // Adjust as needed
+    }
+    .scroll-legend-container {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        bottom: 3%;
+        left: 50%;
+        transform: translateX(-50%) rotate(-90deg); // Center and rotate the text
+        transform-origin: center;
+        white-space: nowrap; // Prevent text from wrapping
+        
+        background: rgba(10, 10, 10, 0.3); // Optional: Add a semi-transparent background
+        padding: .5rem 1rem; // Optional: Add some padding around the text
+        border-radius: 5px; // Optional: Add rounded corners
+        .scroll-legend-text{
+            font-size: 1.4rem; // Adjust the font size as needed
+            font-weight: $bold;
+            color: $blanco; // Adjust the text color as needed
+        }
+    }
+
+    .image-frame {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover; /* Make sure the image covers the container */
+        background-position: center; /* Center the image within the container */
+    /* Additional styling to ensure the frame scales correctly */
+        overflow: hidden;
+        border: 5px solid #ccc; // Frame border color
+        padding: 10px; // Space between frame border and image
+        background-color: #fff; // Background color of the frame
+        transition: transform 0.3s ease; // Smooth transition for scaling
+        height: 100%; /* Adjust as needed for vertical aspect ratio */
+        width: 90%;
+        background-image: url('../img/portadabackgroundvertical.webp');
+        @include tablet{
+            width: 80%;
+            height: 100%;
+            background-image: url('../img/portadabackground.webp');
+        }
+        
+    }
+
     
 }
 
-.portada{
-    height: 370vh;
-    background-image: url(../img/portada.webp);
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat; 
-    position: relative;
-    .overlay{
-        background: rgba(0, 0, 0, 0.4);
-    }
-    
+.fixed-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff; /* Background color to avoid transparency issues */
+    z-index: 2; /* Ensure it's above the ghost div */
+    transition: top 0.3s ease; /* Smooth transition effect */
 }
+
 
 
 .transportation-section{

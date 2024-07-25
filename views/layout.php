@@ -1,6 +1,7 @@
 <?php
-
+    session_start();
     $auth = $_SESSION['login'] ?? false ;
+    
 
     if(!isset ($inicio)){
         $inicio = false;
@@ -66,7 +67,7 @@
                     <a href="<?php echo $inicio ? "#technology" : "/#technology" ?>" class="scroll">Medical Technology</a>
                     <a href="<?php echo $inicio ? "#clinicas" : "#" ?>" class="scroll">Our Clinics</a>
                     <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>" class="scroll">Services</a>
-                    <a href="/login">Log In</a>
+                    <a href="<?php echo $auth ? "/logout" : "/login" ?>" class="<?php echo $auth ? "logueado" : "deslogueado" ?>"><?php echo $auth ? "Log Out" : "Log In" ?></a>
                     
                 </nav>
                 
@@ -89,7 +90,7 @@
                 
                 <a href="<?php echo $inicio ? "#contactus" : "/#contactus" ?>" class="scroll">Contact</a>
                 <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>" class="scroll">Services</a>
-                <a href="/login">Log In</a>
+                <a href="<?php echo $auth ? "/logout" : "/login" ?>"><?php echo $auth ? "Log In" : "Log Out" ?></a>
                 
             </nav>
         </div>

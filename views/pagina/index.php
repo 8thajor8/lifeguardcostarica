@@ -1,7 +1,19 @@
+
+<div class="ghost-div"></div>
 <main class="<?php echo $inicio ? "clip" : ""; ?>">
     
-    <div class="portada">
-        <div class="overlay"></div>
+    <div class="portada portada-fixed">
+        <div class="image-frame">
+            
+        </div>
+        <div class="scroll-legend-container"><p class="scroll-legend-text">&laquo;   SCROLL</p></div>
+    </div>
+    
+    <div class="portada portada-fixed2">
+        <div class="image-frame">
+           
+        </div>
+        <div class="scroll-legend-container"><p class="scroll-legend-text">&laquo;   SCROLL</p></div>
     </div>
     
     <section class="transportation-section">

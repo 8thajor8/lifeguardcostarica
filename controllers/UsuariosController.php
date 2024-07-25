@@ -50,6 +50,14 @@ class UsuariosController{
 
     }
 
+    public static function logout(){
+
+        session_start();
+        $_SESSION = [];
+        header('Location: /');
+        
+    }
+
     public static function crear(Router $router){
 
         $usuario = new Usuario();

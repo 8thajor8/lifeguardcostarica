@@ -53,6 +53,7 @@
         font-weight: $bold;
         display: block;
         text-align: center;
+        
         @include tablet{
             margin-right: 3rem;
             font-size: 1.5rem;
@@ -63,6 +64,21 @@
                 color: $rojo;
             }
         }
+    }
+    a.logueado {
+    // Additional styles for <a> tags with class typea
+    color: $rojo;
+    &:hover{
+        color: $blanco;
+    }
+    
+    }
+    a.deslogueado {
+    // Additional styles for <a> tags with class typea
+    color: $amarillo;
+    &:hover{
+        color: $blanco;
+    }
     }
 }
 

@@ -25,6 +25,7 @@ $router->get('/configuracion', [PaginasController::class, 'configuracion']);
 //Usuarios
 $router->get('/login', [UsuariosController::class, 'login']);
 $router->post('/login', [UsuariosController::class, 'login']);
+$router->get('/logout', [UsuariosController::class, 'logout']);
 $router->get('/usuarios/crear', [UsuariosController::class, 'crear']);
 $router->post('/usuarios/crear', [UsuariosController::class, 'crear']);
 
