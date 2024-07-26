@@ -147,6 +147,8 @@ function clipCurtain() {
     var imageFrame = document.querySelector('.portada-fixed .image-frame');
     var imageFrame2 = document.querySelector('.portada-fixed2 .image-frame');
     var ghostDiv = document.querySelector('.ghost-div');
+    var inicio = document.querySelector('.inicio');
+   
 
     // Adjust this factor to slow down the clipping effect
     var scrollFactor = 1; // Increase this value to slow down the effect
@@ -157,6 +159,8 @@ function clipCurtain() {
 
     // Calculate when to fix the main content
     var ghostDivOffset = ghostDiv.offsetHeight * 0.5; // Adjust this value to start fixing slightly before reaching the bottom of ghost-div
+    var imageFrameTop = imageFrame2.offsetTop;
+    var imageFrameHeight = imageFrame2.offsetHeight;
 
     window.addEventListener('scroll', function () {
         var scrollY = window.scrollY;
@@ -208,10 +212,27 @@ function clipCurtain() {
             
             mainContent.classList.add('fixed-main');
             ghostDiv.style.opacity = '0'; // Hide the ghost div
+          
 
         } else {
             mainContent.classList.remove('fixed-main');
             ghostDiv.style.opacity = '1'; // Show the ghost div
+            
         }
+
+        if(scrollY < (imageFrameTop + imageFrameHeight*2)){
+            
+            inicio.style.position = 'fixed';
+            inicio.style.top = '0'; // Reset top position as needed
+            inicio.style.zIndex = '4'; // Ensure it's above header and portada
+            
+        } else{
+            
+            // Reset inicio's position when not at the end of portada
+            inicio.style.position = 'absolute';
+            inicio.style.top = '0'; // Adjust based on portada's position and height
+            inicio.style.zIndex = '3'; // Ensure it's above other content
+        }
+        
     });
 }

@@ -1,5 +1,6 @@
 <?php
     session_start();
+    echo ini_get('session.save_path'); // Check the current session save path
     $auth = $_SESSION['login'] ?? false ;
     
 
