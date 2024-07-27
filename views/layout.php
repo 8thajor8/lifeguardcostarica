@@ -39,7 +39,7 @@
     
     <header class="header <?php echo $inicio ? "inicio" : ""; ?>">
         <?php if($inicio) { ?> <div class="video-container">
-            <video autoplay muted loop id="background-video">
+            <video autoplay muted loop playsinline controls id="background-video">
                 <source src="/build/img/samplevideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
