@@ -10,8 +10,10 @@ function iniciarApp(){
         scrollNav();
         restaltarEnlace();
         testimonialSlider();
+        playVideo();
         accordion();
         clipCurtain();
+        
     }
     
 }
@@ -235,4 +237,15 @@ function clipCurtain() {
         }
         
     });
+    
 }
+
+function playVideo(){
+    var video = document.getElementById('background-video');
+    if (video) {
+        video.play().catch(function(error) {
+            console.log('Error trying to play video:', error);
+        });
+    }
+}
+
