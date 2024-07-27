@@ -39,13 +39,11 @@
     
     <header class="header <?php echo $inicio ? "inicio" : ""; ?>">
         <?php if($inicio) { ?> <div class="video-container">
-            <!--<video autoplay muted loop id="background-video">
-                <source src="/build/img/video.mp4" type="video/mp4">
+            <video autoplay muted loop id="background-video">
+                <source src="/build/img/samplevideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-            </video>-->
-            <img src="/build/img/transportation.jpg" id="background-video">
-            
-            
+            </video>
+                       
             <?php echo $inicio ? "<div class='titulo-header'><h1>24/7 Urgent Care, Evacuations and Telemedicine Consultations</h1></div>" : "" ?>
         </div>
         
