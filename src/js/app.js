@@ -10,6 +10,7 @@ function iniciarApp(){
         scrollNav();
         restaltarEnlace();
         testimonialSlider();
+        videoLoader();
         playVideo();
         accordion();
         clipCurtain();
@@ -96,12 +97,13 @@ function eventListeners(){
 
 function navegacionMobile(){
     const navegacion = document.querySelector('.navegacion');
-    
+    const navegacionContainer = document.querySelector('.barra');
     if(navegacion.classList.contains('mostrar')){
         navegacion.classList.remove('mostrar');
-
+        navegacionContainer.classList.remove('barraOverlay');
         }else{
                 navegacion.classList.add('mostrar');
+                navegacionContainer.classList.add('barraOverlay');
             }
     
 }
@@ -141,6 +143,34 @@ function accordion(){
         });
       
 }
+
+function videoLoader(){
+    console.log('hola');
+    var video = document.getElementById('background-video');
+    var loader = document.getElementById('video-loader');
+    
+    // Listen for the 'canplaythrough' event to ensure the video is fully loaded
+    video.addEventListener('canplaythrough', function() {
+        console.log('cargo');
+        loader.style.display = 'none'; // Hide the loader
+        video.style.display = 'block'; // Show the video
+    });
+
+    // Fallback in case 'canplaythrough' doesn't fire
+    video.addEventListener('loadeddata', function() {
+        if (video.readyState >= 3) {
+            console.log('cargo2');
+            loader.style.display = 'none'; // Hide the loader
+            video.style.display = 'block'; // Show the video
+        }
+    });
+
+    // Attempt to play the video to trigger the loading
+    video.play().catch(function(error) {
+        console.log('Error trying to play video:', error);
+    });
+}
+
 
 function clipCurtain() {
     var header = document.querySelector('.video-container');
@@ -248,4 +278,6 @@ function playVideo(){
         });
     }
 }
+
+
 
