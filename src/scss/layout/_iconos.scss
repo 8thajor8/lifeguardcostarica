@@ -120,4 +120,88 @@ main{
         color: lighten($azul,10%);
         font-weight: $black;
     }
+    &__image{
+        cursor: pointer;
+    }
+}
+
+/* Base styles */
+.off-canvas-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+}
+
+.modal-content video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Slide animations */
+.modal-slide-up {
+    animation: slide-up 0.5s forwards;
+}
+
+.modal-slide-down {
+    animation: slide-down 0.5s forwards;
+}
+
+.modal-slide-left {
+    animation: slide-left 0.5s forwards;
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-left {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.no-scroll {
+    overflow: hidden;
 }

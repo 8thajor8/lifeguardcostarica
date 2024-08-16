@@ -14,6 +14,7 @@ function iniciarApp(){
         playVideo();
         accordion();
         clipCurtain();
+        iconosCollapsable();
         
     }
     
@@ -277,6 +278,46 @@ function playVideo(){
             console.log('Error trying to play video:', error);
         });
     }
+}
+
+function iconosCollapsable(){
+    const modal = document.getElementById('modal');
+    const video = document.getElementById('modal-video');
+    const closeModalButton = document.querySelector('.close-modal');
+
+    // Functions to open modal with the right animation
+    function openModal(animationClass, videoSource) {
+        modal.style.display = 'flex';
+        modal.classList.remove('modal-slide-up', 'modal-slide-down', 'modal-slide-left');
+        modal.classList.add(animationClass);
+        video.src = videoSource;
+        video.play();
+
+        document.body.classList.add('no-scroll');
+    }
+
+    // Event listeners for the icons
+    document.querySelector('.iconos-transportation .icono:nth-child(1)').addEventListener('click', function() {
+        openModal('modal-slide-up', '/build/img/sea-division.mp4');
+    });
+
+    document.querySelector('.iconos-transportation .icono:nth-child(2)').addEventListener('click', function() {
+        openModal('modal-slide-down', '/build/img/air-division.mp4');
+    });
+
+    document.querySelector('.iconos-transportation .icono:nth-child(3)').addEventListener('click', function() {
+        openModal('modal-slide-left', '/build/img/ground-division.mp4');
+    });
+
+    // Close modal functionality
+    closeModalButton.addEventListener('click', function() {
+        modal.style.display = 'none';
+        video.pause();
+        video.src = ''; // Stop the video
+
+        // Re-enable scrolling
+        document.body.classList.remove('no-scroll');
+    });
 }
 
 
