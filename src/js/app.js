@@ -146,13 +146,12 @@ function accordion(){
 }
 
 function videoLoader(){
-    console.log('hola');
+    
     var video = document.getElementById('background-video');
     var loader = document.getElementById('video-loader');
     
     // Listen for the 'canplaythrough' event to ensure the video is fully loaded
     video.addEventListener('canplaythrough', function() {
-        console.log('cargo');
         loader.style.display = 'none'; // Hide the loader
         video.style.display = 'block'; // Show the video
     });
@@ -160,7 +159,6 @@ function videoLoader(){
     // Fallback in case 'canplaythrough' doesn't fire
     video.addEventListener('loadeddata', function() {
         if (video.readyState >= 3) {
-            console.log('cargo2');
             loader.style.display = 'none'; // Hide the loader
             video.style.display = 'block'; // Show the video
         }

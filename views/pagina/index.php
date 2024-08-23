@@ -89,9 +89,9 @@
             <div class="content even">
                 <div class="image">
                     <picture>
-                        <source srcset="./build/img/ambulance.webp" type="image/webp">
-                        <source srcset="./build/img/ambulance.jpg" type="image/jpg">
-                            <img loading="lazy" src="./build/img/ambulance.jpg" alt="Ambulance">
+                        <source srcset="./build/img/ambulanceabout.webp" type="image/webp">
+                        <source srcset="./build/img/ambulanceabout.jpg" type="image/jpg">
+                            <img loading="lazy" src="./build/img/ambulanceabout.jpg" alt="Ambulance">
                     </picture>
                 </div>
                 <div class="text">
@@ -187,10 +187,11 @@
                 <div class="icono">
                     
                     <h3>Extensive Fleet</h3>
-                    <p>X ALS Ambulances</p>
-                    <p>X Boat Ambulances</p>
-                    <p>X ALS Planes</p>
-                    <p>X Evac Helicopters</p>
+                    <p>ALS Ground Ambulance</p>
+                    <p>ALS Boat Ambulance</p>
+                    <p>ALS Fixed Wing Aircraft</p>
+                    <p>ALS Rotor Wing Aircraft</p>
+                    <p>MedEvac Helicopter</p>
                 </div>
                 <div class="icono">
                     <h3>24/7 Availability</h3>
