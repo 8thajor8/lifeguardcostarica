@@ -7,6 +7,9 @@
     if(!isset ($inicio)){
         $inicio = false;
     }
+    if(!isset ($appFormulario)){
+        $appFormulario = false;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +121,9 @@
 
     <script>
         var inicio = <?php echo $inicio ? 'true' :'false'; ?>;
-        
+    </script>
+    <script>
+        var appFormulario = <?php echo $appFormulario ? 'true' :'false'; ?>;
     </script>
     <script src="./build/js/bundle.min.js"></script>
 </body>

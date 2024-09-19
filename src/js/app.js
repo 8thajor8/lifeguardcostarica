@@ -1,3 +1,7 @@
+let paso = 1;
+let pasoInicial = 1;
+let pasoFinal = 4;
+
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
 });
@@ -16,6 +20,15 @@ function iniciarApp(){
         clipCurtain();
         iconosCollapsable();
         
+    }
+    if(appFormulario){
+        mostrarSeccion();
+        tabs();
+        botonesPaginador();
+        paginaAnterior();
+        paginaSiguiente();
+        toggleFieldsHousecall();
+        toggleFieldsSymptoms();
     }
     
 }
@@ -93,6 +106,12 @@ function restaltarEnlace (){
 function eventListeners(){
     const mobileMenu = document.querySelector('.mobile-menu');
     mobileMenu.addEventListener('click', navegacionMobile);
+    const housecallCheckbox = document.getElementById('housecall');
+    housecallCheckbox.addEventListener('change', toggleFieldsHousecall);
+    const convertBtn = document.getElementById('convertBtn');
+    convertBtn.addEventListener('click', extractLatLngFromLink);
+    const symptomsCheckbox = document.getElementById('have_symptoms');
+    symptomsCheckbox.addEventListener('change', toggleFieldsSymptoms);
 
     }
 
@@ -316,7 +335,138 @@ function iconosCollapsable(){
         // Re-enable scrolling
         document.body.classList.remove('no-scroll');
     });
+
 }
 
+function mostrarSeccion(){
+    //Ocultar la seccion q tenga la clase mostrar
+    const seccionAnterior = document.querySelector('.mostrar');
+    if(seccionAnterior){
+        seccionAnterior.classList.remove('mostrar');
+    }
+    //Seleccionar la seccion con el paso correspondiente
+    const pasoSelector = `#paso-${paso}`;
+    const seccion = document.querySelector(pasoSelector);
+    
+    seccion.classList.add('mostrar'); 
+
+    //Resaltar tab actual
+    const tabAnterior = document.querySelector('.actual');
+    if(tabAnterior){
+        tabAnterior.classList.remove('actual');
+    }
+    const tab = document.querySelector(`[data-paso="${paso}"]`);
+    tab.classList.add('actual');
+}
+
+function tabs(){
+    const botones = document.querySelectorAll('.tabs button');
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', function(e){
+            paso = parseInt(e.target.dataset.paso);
+            
+            mostrarSeccion();
+            botonesPaginador();
+            
+        })
+    })
+    
+}
+
+function botonesPaginador(){
+
+    const paginaAnterior = document.querySelector('#anterior');
+    const paginaSiguiente = document.querySelector('#siguiente');
+    if(paso === 1){
+        paginaAnterior.classList.add('ocultar_boton');
+        paginaSiguiente.classList.remove('ocultar_boton');
+    } else if(paso === 4 ){
+        paginaAnterior.classList.remove('ocultar_boton');
+        paginaSiguiente.classList.add('ocultar_boton');
+    } else {
+        paginaSiguiente.classList.remove('ocultar_boton');
+        paginaAnterior.classList.remove('ocultar_boton');
+    }
+
+    mostrarSeccion();
+
+}
+
+function paginaAnterior(){
+    const paginaAnterior = document.querySelector('#anterior');
+    paginaAnterior.addEventListener('click', function(){
+        if(paso <= pasoInicial) return;
+        paso--;
+        botonesPaginador();
+        
+    })
+}
+
+function paginaSiguiente(){
+    const paginaSiguiente = document.querySelector('#siguiente');
+    paginaSiguiente.addEventListener('click', function(){
+        if(paso >= pasoFinal) return;
+        paso++;
+        botonesPaginador();
+        
+    })
+}
+
+function toggleFieldsHousecall() {
+    const housecallCheckbox = document.getElementById('housecall');
+    const housecall_fields = document.getElementById('housecall_fields');
+    const latitudInput = document.getElementById('latitud');
+    const longitudInput = document.getElementById('longitud');
+    
+    if (housecallCheckbox.checked) {
+        
+        housecall_fields.classList.add('unhide');
+        
+    } else {
+        housecall_fields.classList.remove('unhide');
+        latitudInput.value = '';
+        longitudInput.value = '';
+        
+    }
+}
+
+function extractLatLngFromLink() {
+    const googleMapsLink = document.getElementById('google_location').value;
+    const regex = /@([-0-9.]+),([-0-9.]+)/;
+    const latitudInput = document.getElementById('latitud');
+    const longitudInput = document.getElementById('longitud');
+    const match = googleMapsLink.match(regex);
+
+    if (match) {
+        const latitud = match[1];
+        const longitud = match[2];
+
+        latitudInput.value = latitud;
+        longitudInput.value = longitud;
+    } else {
+        alert("Please enter a valid Google Maps link.");
+    }
+}
+
+function toggleFieldsSymptoms() {
+    const symptomsCheckbox = document.getElementById('have_symptoms');
+    const symptom_fields = document.getElementById('symptom_fields');
+    const current =  document.getElementById('current_symptoms');
+    const date_symptoms =  document.getElementById('date_symptoms');
+    
+    if (symptomsCheckbox.checked) {
+        
+        symptom_fields.classList.add('unhide');
+        
+    } else {
+        symptom_fields.classList.remove('unhide');
+        current.value = '';
+        date_symptoms.value = '';
+
+        
+        
+    }
+}
 
 

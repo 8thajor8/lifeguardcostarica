@@ -4,6 +4,7 @@ namespace Controllers;
 use MVC\Router;
 use Model\Clinica;
 use Model\Servicio;
+use Model\Appointment;
 use Model\Testimonial;
 
 
@@ -35,6 +36,17 @@ class PaginasController{
         
 
         $router->render('admin/configuracion');
+
+    }
+
+    public static function appointments(Router $router){
+        $appointment = new Appointment();
+        $appFormulario = true;
+
+        $router->render('pagina/appointments/appointments',[
+            'appointment' => $appointment,
+            'appFormulario' => $appFormulario
+        ]);
 
     }
 
