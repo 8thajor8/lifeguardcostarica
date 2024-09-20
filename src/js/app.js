@@ -107,14 +107,19 @@ function eventListeners(){
     const mobileMenu = document.querySelector('.mobile-menu');
     mobileMenu.addEventListener('click', navegacionMobile);
     
-    if(appFormulario){
-        const housecallCheckbox = document.getElementById('housecall');
+    
+    const housecallCheckbox = document.getElementById('housecall');
+    const symptomsCheckbox = document.getElementById('have_symptoms');
+    const convertBtn = document.getElementById('convertBtn');
+    if(housecallCheckbox){
         housecallCheckbox.addEventListener('change', toggleFieldsHousecall);
-        const convertBtn = document.getElementById('convertBtn');
         convertBtn.addEventListener('click', extractLatLngFromLink);
-        const symptomsCheckbox = document.getElementById('have_symptoms');
         symptomsCheckbox.addEventListener('change', toggleFieldsSymptoms);
     }
+    
+    
+   
+
 }
 
 function navegacionMobile(){
