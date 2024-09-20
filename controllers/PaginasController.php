@@ -56,7 +56,7 @@ class PaginasController{
 
             $errores = $appointment->validar();
 
-            debuguear($appointment);
+            
         }
 
 
