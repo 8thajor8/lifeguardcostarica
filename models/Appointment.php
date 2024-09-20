@@ -72,4 +72,69 @@ class Appointment extends ActiveRecord{
         
 
     }
+
+    public function validar(){
+
+        if(!$this->name){
+            self::$errores[] = "You must add your name";
+            
+        }
+        if(!$this->lastname1){
+            self::$errores[] = "You must add your last name";
+            
+        }
+        
+        if(!$this->dob){
+            self::$errores[] = "You must add your date of birth";
+          
+        }
+
+        if(!$this->id_type){
+            self::$errores[] = "You must select an ID type";
+        }
+
+        if(!$this->id_number){
+            self::$errores[] = "You must add your ID number";
+        }
+
+        if(!$this->gender){
+            self::$errores[] = "You select a gender";
+        }
+
+        if(!$this->nationality){
+            self::$errores[] = "You must add your nationality";
+        }
+
+        if(!$this->email){
+            self::$errores[] = "You must add your e-mail";
+        }else{
+            if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+           
+                self::$errores[] = 'Invalid Email';  
+            }
+        }
+
+        if(!$this->phone){
+            self::$errores[] = "You must add your contact number";
+        }
+        
+        if(!$this->doses){
+            self::$errores[] = "You select your dose type";
+        }
+
+        if(!$this->date_appointment){
+            self::$errores[] = "You must add select a date for your appointment";
+        }
+
+        if(!$this->location_appointment){
+            self::$errores[] = "You must select a location for your appointment";
+        }
+
+        if(!$this->time_appointment){
+            self::$errores[] = "You must select a time for your appointment";
+        }
+        
+        
+        return self::$errores;
+    }
 }

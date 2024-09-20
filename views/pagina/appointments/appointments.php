@@ -1,7 +1,16 @@
 <main class="contenedor-app">
     <div class="contenedor-app__instructions">
         <div class="contenedor-app__instructions__content">
-            <h1 class="fixed-scroll clinicas-tittle">Book a COVID-19 Test</h1>
+            <?php
+                foreach($errores as $error):
+            ?>
+                <div class="alerta error">
+                    <?php echo $error; ?>
+                </div>
+            <?php
+                endforeach;
+            ?>
+            <h1 class="appointments_tittle">Book a COVID-19 Test</h1>
 
             <h3>Our service</h3>
 
@@ -21,9 +30,15 @@
             <button type="button" data-paso="4">Appointment</button>
 
         </nav>
-        <?php
-            include 'appointmentsFormulario.php'
-        ?>
+
+        <form method="POST" novalidate >
+            <?php
+                include 'appointmentsFormulario.php'
+            ?>
+
+            
+
+        </form>
 
         <div class="paginacion">
             <button 

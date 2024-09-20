@@ -106,7 +106,7 @@
 }
 
 .boton{
-    @include boton($azul, $blanco);
+    @include boton($azul, inline-block);
 }
 
 .paginacion{
@@ -124,6 +124,24 @@
     }
 
 
+}
+
+.alerta{
+    padding: calc($separacion/4);
+    color: $blanco;
+    width: 100%;
+    display: block;
+    margin-bottom: 2rem;
+    
+    text-align: center;
+    font-weight: $bold;
+    border-radius: 1rem;
+    &.error{
+        background-color: $rojo;
+    }
+    &.exito{
+        background-color: $verde;
+    }
 }
 
 

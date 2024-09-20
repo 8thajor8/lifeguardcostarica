@@ -18,6 +18,7 @@ $router = new Router();
 $router->get('/', [PaginasController::class, 'index']);
 $router->get('/clinicas', [PaginasController::class, 'clinicas']);
 $router->get('/appointments', [PaginasController::class, 'appointments']);
+$router->post('/appointments', [PaginasController::class, 'appointments']);
 
 //Admin
 

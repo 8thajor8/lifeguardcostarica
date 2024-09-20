@@ -29,6 +29,7 @@ function iniciarApp(){
         paginaSiguiente();
         toggleFieldsHousecall();
         toggleFieldsSymptoms();
+        seleccionarHora();
     }
     
 }
@@ -452,7 +453,8 @@ function extractLatLngFromLink() {
         latitudInput.value = latitud;
         longitudInput.value = longitud;
     } else {
-        alert("Please enter a valid Google Maps link.");
+       
+        mostrarAlerta('Please enter a valid Google Maps link.', 'error', '.contenedor-app__instructions__content', '.appointments_tittle')
     }
 }
 
@@ -474,6 +476,45 @@ function toggleFieldsSymptoms() {
         
         
     }
+}
+
+function seleccionarHora(){
+
+    const inputHora = document.querySelector('#time_appointment');
+    inputHora.addEventListener('input', function(e){
+        
+        const horaCita= e.target.value
+        const hora = horaCita.split(':')[0]
+
+        if(hora < 8 || hora > 17){
+            e.target.value = '';
+            mostrarAlerta('Clinic Hours are between 8 and 17 hs.', 'error', '.contenedor-app__instructions__content', '.appointments_tittle')
+        }  
+    })
+}
+
+function mostrarAlerta(mensaje, tipo, elem, prevelem, desaparece = true){
+
+    const alertaPrevia = document.querySelector('.alerta');
+    if(alertaPrevia) {
+        alertaPrevia.remove();
+    };
+
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo);
+
+    const elemento = document.querySelector(elem);
+    const antesde = document.querySelector(prevelem);
+    elemento.insertBefore(alerta, antesde);
+
+    if(desaparece){
+        setTimeout(() => {
+            alerta.remove();
+        }, 3000);
+    }
+
 }
 
 

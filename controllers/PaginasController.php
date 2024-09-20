@@ -42,9 +42,27 @@ class PaginasController{
     public static function appointments(Router $router){
         $appointment = new Appointment();
         $appFormulario = true;
+        $errores = Appointment::getErrores();
+
+
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            
+            $appointment = new Appointment($_POST);
+            $appointment->housecall = isset($_POST['housecall']) ? 1 : 0;
+            $appointment->have_symptoms = isset($_POST['have_symptoms']) ? 1 : 0;
+            $appointment->proximity = isset($_POST['proximity']) ? 1 : 0;
+            $appointment->quarantined = isset($_POST['quarantined']) ? 1 : 0;
+
+
+            $errores = $appointment->validar();
+
+            debuguear($appointment);
+        }
+
 
         $router->render('pagina/appointments/appointments',[
             'appointment' => $appointment,
+            'errores' => $errores,
             'appFormulario' => $appFormulario
         ]);
 

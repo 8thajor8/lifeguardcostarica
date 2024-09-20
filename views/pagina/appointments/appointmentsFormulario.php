@@ -65,7 +65,7 @@
         
         <div class="campo">
             <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" placeholder="Your phone number" value="<?php echo s($appointment->phone); ?>" >
+            <input type="text" id="phone" name="phone" placeholder="Your phone number. Include country code" value="<?php echo s($appointment->phone); ?>" >
         </div>
         
         <div class="campo">
@@ -184,6 +184,7 @@
             min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
             id="date_appointment"
             name="date_appointment"
+            value="<?php echo s($appointment->date_appointment); ?>"
         />
     </div>
     
@@ -199,8 +200,13 @@
 
     <div class="campo">
         <label for="time_appointment">Time of Appointment:</label>
-        <input type="time" id="time_appointment" name="time_appointment" min="08:00" max="16:30" step="1800" value="<?php echo s($appointment->time_appointment); ?>" >
+        <input type="time" id="time_appointment" name="time_appointment" step="1800" value="<?php echo s($appointment->time_appointment); ?>" >
     </div>
+
+    <div class="submit_button">
+        <input type="submit" value="Schedule Appointment" class="boton-azul-flex">
+    </div>
+
 </fieldset>
 
 
