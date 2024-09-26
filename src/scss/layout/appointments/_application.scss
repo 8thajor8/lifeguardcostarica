@@ -7,6 +7,10 @@
         display: none;
         
     }
+    .mostrar{
+        display: block;
+    }
+
     legend{
         color: $blanco;
         padding: 0 1rem;
@@ -78,9 +82,6 @@
 
 }
 
-.mostrar{
-    display: block;
-}
 
 .ocultar{
     display: none;
