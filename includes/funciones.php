@@ -18,7 +18,7 @@ function s($html) : string{
 }
 
 function validarTipoContenido ($tipo){
-    $tipos = ['clinica', 'servicio', 'testimonial'];
+    $tipos = ['clinica', 'servicio', 'testimonial', 'status'];
 
     return in_array($tipo, $tipos);
 

@@ -4,8 +4,8 @@ namespace Model;
 
 class Appointment extends ActiveRecord{
 
-    protected static $tabla = 'appintment';
-    protected static $columnasBD = ['id', 'name', 'lastname1', 'lastname2', 'dob', 'id_type', 'id_number', 'gender', 'nationality', 'email', 'phone', 'address', 'province', 'canton', 'district', 'housecall', 'latitud', 'longitud', 'google_location', 'doses', 'have_symptoms', 'current_symptoms', 'date_symptoms', 'proximity', 'quarantined', 'conditions', 'date_appointment', 'location_appointment', 'time_appointment'];
+    protected static $tabla = 'appointments';
+    protected static $columnasBD = ['id', 'name', 'lastname1', 'lastname2', 'dob', 'id_type', 'id_number', 'gender', 'nationality', 'email', 'phone', 'address', 'province', 'canton', 'district', 'housecall', 'latitud', 'longitud', 'google_location', 'doses', 'have_symptoms', 'current_symptoms', 'date_symptoms', 'proximity', 'quarantined', 'conditions', 'date_appointment', 'location_appointment', 'time_appointment','status'];
 
     public $id;
     public $name;
@@ -36,6 +36,7 @@ class Appointment extends ActiveRecord{
     public $date_appointment;
     public $location_appointment;
     public $time_appointment;
+    public $status;
     
 
     public function __construct($args = []){
@@ -56,8 +57,8 @@ class Appointment extends ActiveRecord{
         $this->canton = $args['canton'] ?? '';
         $this->district = $args['district'] ?? '';
         $this->housecall = $args['housecall'] ?? '';
-        $this->latitud = $args['latitud'] ?? '';
-        $this->longitud = $args['longitud'] ?? '';
+        $this->latitud = $args['latitud'] ?? NULL;
+        $this->longitud = $args['longitud'] ?? NULL;
         $this->google_location = $args['google_location'] ?? '';
         $this->doses = $args['doses'] ?? '';
         $this->have_symptoms = $args['have_symptoms'] ?? '';
@@ -69,6 +70,8 @@ class Appointment extends ActiveRecord{
         $this->date_appointment = $args['date_appointment'] ?? '';
         $this->location_appointment = $args['location_appointment'] ?? '';
         $this->time_appointment = $args['time_appointment'] ?? '';
+        $this->status = $args['status'] ?? '';
+
         
 
     }

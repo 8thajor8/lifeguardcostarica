@@ -36,11 +36,18 @@ class ActiveRecord{
         $atributos = $this->sanitizarAtributos();
         
         //Insertar en base de datos
-        $query = " INSERT INTO " . static::$tabla . " ( "; //el "static:: se utiliza para usar la variable $tabla de la clase que estoy usando
+        $query = "INSERT INTO " . static::$tabla . " ("; //el "static:: se utiliza para usar la variable $tabla de la clase que estoy usando
         $query .= join(', ', array_keys($atributos)); //utilizo el metodo join y array keys para poder transformar todos los keys del array atributos y separarlos con una coma y espacio
-        $query .= ") VALUES (' ";
-        $query .= join("', '", array_values($atributos));
-        $query .= " ' )";
+        $query .= ") VALUES (";
+
+        $values = [];
+        foreach ($atributos as $value) {
+            // Add the value directly if it's NULL, otherwise wrap it in quotes
+            $values[] = is_null($value) ? "NULL" : "'$value'";
+        }
+
+        $query .= join(', ', $values);
+        $query .= ")";
         
         $resultado = self::$db->query($query);
 
@@ -97,7 +104,7 @@ class ActiveRecord{
         $sanitizado = [];
         foreach ($atributos as $key => $value){
 
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = is_null($value) ? NULL : self::$db->escape_string($value);
         }
         
         return $sanitizado;

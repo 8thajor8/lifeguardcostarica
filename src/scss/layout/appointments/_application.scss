@@ -1,15 +1,24 @@
-.formulario{
+.formulario_application{
     margin-top: 5rem;
     width: 100%;
+    fieldset{
+        padding: 2rem 1rem;
+        border: none;
+        display: none;
+        
+    }
+    legend{
+        color: $blanco;
+        padding: 0 1rem;
+        font-weight: $bold;
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
     
 }
 
-fieldset{
-    padding: 2rem 1rem;
-    border: none;
-    display: none;
-    
-}
+
 
 .two-col {
     display: grid;
@@ -21,16 +30,9 @@ fieldset{
    
 }
 
-legend{
-        color: $blanco;
-        padding: 0 1rem;
-        font-weight: $bold;
-        font-size: 3rem;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
 
-.campo{
+
+.campo_appointments{
     display: flex;
     flex-direction: column;
     margin-bottom: 1.5rem;

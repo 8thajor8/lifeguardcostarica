@@ -5,9 +5,11 @@ require_once __DIR__ . '/../includes/app.php';
 use MVC\Router;
 use Controllers\PaginasController;
 use Controllers\ClinicasController;
-use Controllers\ServiciosController;
-use Controllers\TestimonialsController;
 use Controllers\UsuariosController;
+use Controllers\ServiciosController;
+use Controllers\AppointmentsController;
+use Controllers\TestimonialsController;
+use Controllers\AppointmentStatusController;
 
 
 
@@ -55,6 +57,16 @@ $router->get('/testimoniales/actualizar', [TestimonialsController::class, 'actua
 $router->post('/testimoniales/actualizar', [TestimonialsController::class, 'actualizar']);
 $router->post('/testimoniales/eliminar', [TestimonialsController::class, 'eliminar']);
 
+//Appointments
+$router->get('/appointments/listado', [AppointmentsController::class, 'listado']);
+
+//Appointments Status
+$router->get('/appointments/status/listado', [AppointmentStatusController::class, 'listado']);
+$router->get('/appointments/status/crear', [AppointmentStatusController::class, 'crear']);
+$router->post('/appointments/status/crear', [AppointmentStatusController::class, 'crear']);
+$router->get('/appointments/status/actualizar', [AppointmentStatusController::class, 'actualizar']);
+$router->post('/appointments/status/actualizar', [AppointmentStatusController::class, 'actualizar']);
+$router->post('/appointments/status/eliminar', [AppointmentStatusController::class, 'eliminar']);
 
 $router->comprobarRutas();
 

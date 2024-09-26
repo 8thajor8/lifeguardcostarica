@@ -30,6 +30,7 @@ function iniciarApp(){
         toggleFieldsHousecall();
         toggleFieldsSymptoms();
         seleccionarHora();
+        scheduleSuccess();
     }
     
 }
@@ -512,9 +513,19 @@ function mostrarAlerta(mensaje, tipo, elem, prevelem, desaparece = true){
     if(desaparece){
         setTimeout(() => {
             alerta.remove();
-        }, 3000);
+        }, 5000);
     }
 
+}
+
+function scheduleSuccess(){
+    if(appointment){
+        
+        mostrarAlerta('Your appointment has been scheduled successfully', 'exito', '.contenedor-app__instructions__content', '.appointments_tittle')
+        setTimeout(() => {
+            window.location.href = '/appointments';
+        }, 5000);
+    }
 }
 
 

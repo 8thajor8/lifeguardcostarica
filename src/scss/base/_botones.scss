@@ -19,6 +19,9 @@
 .boton-azul{
     @include boton($azul, inline-block);
 }
+.boton-azul-block{
+    @include boton($azul, block);
+}
 .boton-azul-flex{
     @include boton($azul, flex);
     justify-content: end;

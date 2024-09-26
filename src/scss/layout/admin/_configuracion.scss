@@ -1,15 +1,22 @@
-@include tablet{
-    .contenedor-boxes{
-        margin: 8rem 0;
-        @include grid(3, 4rem);
-    }
+
+.contenedor-boxes{
+    padding: 1rem;
+    @include tablet{
+            margin: 8rem 0;
+            padding: 2rem 5rem;
+            @include grid(3, 4rem);
+            @include desktop{
+                 padding: 2rem 15rem;
+            }
+        }
+
 }
 
 .box {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 20px;
-
+    
     .box-header {
         background-color: $azul;
         padding: 10px;

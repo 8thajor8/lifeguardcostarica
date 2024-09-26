@@ -10,6 +10,9 @@
     if(!isset ($appFormulario)){
         $appFormulario = false;
     }
+    if(!isset ($mensaje)){
+        $mensaje = false;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -99,6 +102,7 @@
         </div>
     </header>
 
+    
     <?php echo $contenido; ?>
 
     <footer class="footer ">
@@ -125,6 +129,11 @@
     <script>
         var appFormulario = <?php echo $appFormulario ? 'true' :'false'; ?>;
     </script>
+
+     <script>
+        var appointment = <?php echo $mensaje ? 'true' : 'false'; ?>
+    </script>
+
     <script src="./build/js/bundle.min.js"></script>
 </body>
 </html>

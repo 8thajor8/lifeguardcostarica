@@ -17,7 +17,7 @@
 
         <form class="formulario-login" method="POST" action="/login" novalidate>
 
-            <div class="campo">
+            <div class="campo_login">
                 <label for="email">E-mail</label>
                 <input
                     type="email"
@@ -27,7 +27,7 @@
                 />
             </div>
 
-            <div class="campo">
+            <div class="campo_login">
                 <label for="password">Password</label>
                 <input
                     type="password"

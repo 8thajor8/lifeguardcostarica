@@ -41,3 +41,38 @@ table.listados{
     width: 20rem;
 }
 
+.listado_appointments{
+    padding: 1rem;
+    table{
+        tbody{
+            td{
+                padding: 0 1rem;
+                .status{
+                padding: .7rem 1rem ;
+                border-radius: 1rem;
+                text-transform: uppercase;
+                font-weight: $black;
+                color: white;
+                }
+                .status-open {
+                    background-color: $amarillo; /* Color for status 1 */
+                }
+
+                .status-cancelled {
+                    background-color: $rojo; /* Color for status 3 */
+                }
+
+                .status-default {
+                    background-color: $azul; /* Color for status 4 */
+                }
+
+                .status-finished {
+                    background-color: $verde; /* Color for status 2 */
+                }
+            
+            }
+            
+        }
+    }
+    
+}

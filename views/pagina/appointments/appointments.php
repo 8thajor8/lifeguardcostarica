@@ -31,7 +31,7 @@
 
         </nav>
 
-        <form method="POST" novalidate >
+        <form class="formulario_application" method="POST" novalidate >
             <?php
                 include 'appointmentsFormulario.php'
             ?>
