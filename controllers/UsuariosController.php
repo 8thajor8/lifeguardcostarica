@@ -2,18 +2,24 @@
 
 namespace Controllers;
 use MVC\Router;
+use Model\Titulo;
 use Model\Usuario;
 
 
 class UsuariosController{
 
     public static function login(Router $router){
-        
+        session_start();
+        if(isset($_SESSION['login'])){
+            header('Location: /configuracion');
+        }
+
         $errores = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             $usuario = new Usuario($_POST);
+            
 
             $errores = $usuario->validarLogin();
 
@@ -34,6 +40,7 @@ class UsuariosController{
                         $_SESSION['nombre'] = $usuario->nombre; 
                         $_SESSION['email'] = $usuario->email; 
                         $_SESSION['login'] = true; 
+                        $_SESSION['admin'] = $usuario->is_admin ?? null;
 
                         //Redireccionar
                         header('Location: /configuracion');
@@ -58,8 +65,34 @@ class UsuariosController{
         
     }
 
-    public static function crear(Router $router){
+    public static function listado(Router $router){
+        session_start();
+        isAuth();
+        
+        $usuarios = Usuario::all();
+        
+        foreach($usuarios as $usuario){
+             $usuario->user_titulo = Titulo::find($usuario->user_titulo);
+        }
 
+
+        
+        $resultado = $_GET['resultado'] ?? null;
+
+        $router->render('admin/usuarios/usuariosListado', [
+            'usuarios' => $usuarios,
+            
+            'resultado' => $resultado
+        ]);
+
+    }
+
+    public static function crear(Router $router){
+        session_start();
+        isAuth();
+        
+        
+        $titulos = Titulo::all();
         $usuario = new Usuario();
         
         $errores = Usuario::getErrores();
@@ -68,7 +101,7 @@ class UsuariosController{
 
             
             $usuario->sincronizar($_POST);
-            
+            $usuario->is_admin = isset($_POST['is_admin']) ? 1 : 0;
             $errores = $usuario->validarNuevaCuenta();
             
             if(empty($errores)){
@@ -86,15 +119,71 @@ class UsuariosController{
 
                     
                     if($resultado){
-                        header('Location: /configuracion');
+                        header('Location: /usuarios/listado?resultado=1');
                     }
                 }
             }
 
         }
 
-        $router->render('admin/usuarios/usuariosCrear', ['usuario'=>$usuario, 'errores'=>$errores]);
+        $router->render('admin/usuarios/usuariosCrear', [
+            'usuario'=>$usuario,
+            'errores'=>$errores,
+            'titulos'=>$titulos
+        ]);
         
+    }
+
+    public static function actualizar(Router $router){
+        session_start();
+        isAuth();
+
+        $id = validarORedireccionar('/configuracion');
+        
+        $titulos = Titulo::all();
+        //Consulta datos de propiedad
+        $usuario = Usuario::find($id);
+
+        //Declaro Variable de errores de validacion de formulario
+        $errores = Usuario::getErrores();
+
+        //Capturo los datos al hacer el submit
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            
+            //Asignar atributos
+        
+            $args = $_POST;
+            
+
+            $usuario->sincronizar($args);
+            
+            $usuario->is_admin = isset($_POST['is_admin']) ? 1 : 0;
+
+            if($usuario->password){
+                $usuario->hashPassword();
+            } 
+
+            //Hago la validacion de los campos, si estan vacios, se envia el mensaje al array de errores
+            $errores = $usuario->validarActualizarUsuario();
+            
+            
+            if(empty($errores)){
+                
+                $usuario->guardar();
+
+                header('Location: /usuarios/listado?resultado=2');
+                
+            }
+
+            
+            
+        }
+
+        $router->render('admin/usuarios/usuariosActualizar', [
+            'usuario' => $usuario,
+            'errores' => $errores,
+            'titulos' => $titulos
+        ]);
     }
 
 }

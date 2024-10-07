@@ -2,7 +2,7 @@
 
     <h1>Crear Usuario</h1>
 
-    <a href="/configuracion" class="boton boton-azul"> Volver </a>
+    <a href="/usuarios/listado" class="boton boton-azul"> Volver </a>
 
     <?php
         foreach($errores as $error):
@@ -14,7 +14,7 @@
         endforeach;
     ?>
 
-    <form class="formulario" method="POST" action="/usuarios/crear" enctype="multipart/form-data">
+    <form class="formulario__appointments__admin" method="POST" action="/usuarios/crear" enctype="multipart/form-data">
         
         <?php include __DIR__ .  '/usuariosFormulario.php' ?>
 

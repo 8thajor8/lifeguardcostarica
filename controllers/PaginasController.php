@@ -33,7 +33,8 @@ class PaginasController{
     }
 
     public static function configuracion(Router $router){
-        
+        session_start();
+        isAuth();     
 
         $router->render('admin/configuracion');
 

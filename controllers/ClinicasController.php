@@ -9,6 +9,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 class ClinicasController{
 
     public static function listado(Router $router){
+        session_start();
+        isAuth();
 
         $clinicas = Clinica::all();
 
@@ -19,6 +21,8 @@ class ClinicasController{
     }
 
     public static function crear(Router $router){
+        session_start();
+        isAuth();
 
         $clinica = new Clinica();
         
@@ -74,6 +78,8 @@ class ClinicasController{
     }
 
     public static function actualizar(Router $router){
+        session_start();
+        isAuth();
 
         $id = validarORedireccionar('/configuracion');
 
@@ -134,7 +140,9 @@ class ClinicasController{
     }
 
     public static function eliminar(Router $router){
-        
+        session_start();
+        isAuth();
+
         if($_SERVER['REQUEST_METHOD'] === 'POST' ){
             
             $id = $_POST['id'];

@@ -34,6 +34,12 @@ table.listados{
     }
     td{
         text-align: center;
+        .status_label{
+            cursor: pointer;
+            &:hover{
+                background-color: darken($rojo,10%);
+            }
+        }
     }
 }
 
@@ -43,6 +49,31 @@ table.listados{
 
 .listado_appointments{
     padding: 1rem;
+    .list_header{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        .list_filtros{
+            margin-right: 5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            input,
+            select{
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                
+            }
+            input{
+                min-width: 25rem;
+            }
+            button{
+                margin-top: 0;
+            }
+        }
+    }
+
     table{
         tbody{
             td{

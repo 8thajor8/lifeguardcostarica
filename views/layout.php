@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     
     $auth = $_SESSION['login'] ?? false ;
     
@@ -93,6 +95,9 @@
                     <a href="<?php echo $inicio ? "#clinicas" : "#" ?>" class="scroll">Our Clinics</a>
                     <a href="<?php echo $inicio ? "#servicios" : "/#servicios" ?>" class="scroll">Services</a>
                     <a href="<?php echo $auth ? "/logout" : "/login" ?>" class="<?php echo $auth ? "logueado" : "deslogueado" ?>"><?php echo $auth ? "Log Out" : "Log In" ?></a>
+                    <?php if($auth){ ?>
+                        <a href="/configuracion" class="deslogueado">Portal</a>
+                    <?php } ?>
                     
                 </nav>
                 
@@ -134,6 +139,6 @@
         var appointment = <?php echo $mensaje ? 'true' : 'false'; ?>
     </script>
 
-    <script src="./build/js/bundle.min.js"></script>
+    <script src="/build/js/bundle.min.js"></script>
 </body>
 </html>

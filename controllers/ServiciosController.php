@@ -9,6 +9,8 @@ use Intervention\Image\Drivers\Gd\Driver;
 class ServiciosController{
 
     public static function listado(Router $router){
+        session_start();
+        isAuth();
 
         $servicios = Servicio::all();
 
@@ -19,6 +21,8 @@ class ServiciosController{
     }
 
     public static function crear(Router $router){
+        session_start();
+        isAuth();
 
         $servicio = new Servicio();
         
@@ -71,6 +75,8 @@ class ServiciosController{
     }
 
     public static function actualizar(Router $router){
+        session_start();
+        isAuth();
 
         $id = validarORedireccionar('/configuracion');
 
@@ -129,6 +135,8 @@ class ServiciosController{
     }
 
     public static function eliminar(Router $router){
+        session_start();
+        isAuth();       
         
         if($_SERVER['REQUEST_METHOD'] === 'POST' ){
             

@@ -36,7 +36,11 @@
                 include 'appointmentsFormulario.php'
             ?>
 
-            
+            <div class="submit_button">
+                <input type="submit" value="Schedule Appointment" class="boton-azul-flex">
+            </div>
+
+        </fieldset>   
 
         </form>
 

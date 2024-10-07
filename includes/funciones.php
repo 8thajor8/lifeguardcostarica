@@ -2,6 +2,7 @@
 
 define('FUNCIONES_URL', __DIR__ . '/funciones.php');
 define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
+define('CARPETA_REPORTES', $_SERVER['DOCUMENT_ROOT'] . '/report_files/');
 
 
 
@@ -39,6 +40,9 @@ function mostrarNotificacion ($codigo){
         case 3:
             $mensaje = "Registro eliminado exitosamente!";
             break;
+        case 4:
+            $mensaje = "Reporte subido exitosamente!";
+            break;
 
         default:
             $mensaje = false;
@@ -65,4 +69,12 @@ function isAuth() : void {
     if(!isset($_SESSION['login'])) {
         header('Location: /');
     }
+}
+
+function is_admin(): bool{
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    return isset($_SESSION['admin']) && !empty($_SESSION['admin']);
+
 }

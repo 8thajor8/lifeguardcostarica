@@ -5,7 +5,9 @@ require_once __DIR__ . '/../includes/app.php';
 use MVC\Router;
 use Controllers\PaginasController;
 use Controllers\ClinicasController;
+use Controllers\ReportesController;
 use Controllers\UsuariosController;
+use Controllers\PacientesController;
 use Controllers\ServiciosController;
 use Controllers\AppointmentsController;
 use Controllers\TestimonialsController;
@@ -30,8 +32,11 @@ $router->get('/configuracion', [PaginasController::class, 'configuracion']);
 $router->get('/login', [UsuariosController::class, 'login']);
 $router->post('/login', [UsuariosController::class, 'login']);
 $router->get('/logout', [UsuariosController::class, 'logout']);
+$router->get('/usuarios/listado', [UsuariosController::class, 'listado']);
 $router->get('/usuarios/crear', [UsuariosController::class, 'crear']);
 $router->post('/usuarios/crear', [UsuariosController::class, 'crear']);
+$router->get('/usuarios/actualizar', [UsuariosController::class, 'actualizar']);
+$router->post('/usuarios/actualizar', [UsuariosController::class, 'actualizar']);
 
 //Clinicas
 $router->get('/clinicas/listado', [ClinicasController::class, 'listado']);
@@ -57,8 +62,27 @@ $router->get('/testimoniales/actualizar', [TestimonialsController::class, 'actua
 $router->post('/testimoniales/actualizar', [TestimonialsController::class, 'actualizar']);
 $router->post('/testimoniales/eliminar', [TestimonialsController::class, 'eliminar']);
 
+//Pacientes
+$router->get('/pacientes/listado', [PacientesController::class, 'listado']);
+$router->post('/pacientes/listado', [PacientesController::class, 'listado']);
+$router->get('/pacientes/crear', [PacientesController::class, 'crear']);
+$router->post('/pacientes/crear', [PacientesController::class, 'crear']);
+$router->get('/pacientes/actualizar', [PacientesController::class, 'actualizar']);
+$router->post('/pacientes/actualizar', [PacientesController::class, 'actualizar']);
+
+//Reportes
+$router->get('/reportes/listado', [ReportesController::class, 'listado']);
+$router->post('/reportes/listado', [ReportesController::class, 'listado']);
+$router->get('/reportes/crear', [ReportesController::class, 'crear']);
+$router->post('/reportes/crear', [ReportesController::class, 'crear']);
+$router->get('/reportes/actualizar', [ReportesController::class, 'actualizar']);
+$router->post('/reportes/actualizar', [ReportesController::class, 'actualizar']);
+$router->get('/reportes/descargar', [ReportesController::class, 'descargar']);
+
 //Appointments
 $router->get('/appointments/listado', [AppointmentsController::class, 'listado']);
+$router->get('/appointments/details', [AppointmentsController::class, 'actualizar']);
+$router->post('/appointments/details', [AppointmentsController::class, 'actualizar']);
 
 //Appointments Status
 $router->get('/appointments/status/listado', [AppointmentStatusController::class, 'listado']);

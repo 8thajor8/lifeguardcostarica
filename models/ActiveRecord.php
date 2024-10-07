@@ -43,12 +43,12 @@ class ActiveRecord{
         $values = [];
         foreach ($atributos as $value) {
             // Add the value directly if it's NULL, otherwise wrap it in quotes
-            $values[] = is_null($value) ? "NULL" : "'$value'";
+            $values[] = is_null($value) || $value == ''? "NULL" : "'$value'";
         }
 
         $query .= join(', ', $values);
         $query .= ")";
-        
+       
         $resultado = self::$db->query($query);
 
         return [
@@ -60,23 +60,35 @@ class ActiveRecord{
         
     }
 
-    public function actualizar(){
-        //Sanitizar los datos
+    public function actualizar() {
+        // Sanitize the data
         $atributos = $this->sanitizarAtributos();
 
         $valores = [];
-        foreach ($atributos as $key => $value){
-            $valores[] = "$key = '$value'";
+        foreach ($atributos as $key => $value) {
+
+            if ($key === 'password' && empty($value)) {
+                continue; // Skip updating password if it's empty
+            }
+            // Handle NULL values and empty strings
+            if (is_null($value) || $value === '') {
+                $valores[] = "$key = NULL"; // Set the field to NULL
+            } else {
+                $valores[] = "$key = '$value'"; // Use quotes for non-null values
+            }
         }
 
-        $query = "UPDATE " .  static::$tabla . " SET ";
-        $query .= join (', ', $valores);
+        $query = "UPDATE " . static::$tabla . " SET ";
+        $query .= join(', ', $valores);
         $query .= " WHERE id = " . self::$db->escape_string($this->id);
-
+       
+        // Execute the query and return the result
         $resultado = self::$db->query($query);
 
-        
-
+        return [
+            'resultado' => $resultado,
+            'affected_rows' => self::$db->affected_rows // Optional: Return affected rows
+        ];
     }
 
     //Definir conexion
@@ -147,11 +159,10 @@ class ActiveRecord{
         return self::$errores;
     }
 
-    //Busca todos los registros
-    public static function all(){
-        $query = "SELECT * FROM " . static::$tabla . " ";
+    // Obtener todos los Registros
+    public static function all($orden = 'DESC') {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id ${orden}";
         $resultado = self::consultarSQL($query);
-        
         return $resultado;
     }
 
@@ -175,6 +186,33 @@ class ActiveRecord{
         return array_shift( $resultado ) ;
     }
 
+    public static function belongsTo($columna, $valor) {
+    $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+    $resultado = self::consultarSQL($query);
+    return $resultado ;
+    }
+
+    public static function searchByFields($columns, $value) {
+        // Sanitize input to prevent SQL injection
+        $value = htmlspecialchars($value, ENT_QUOTES);
+
+        // Build the query for multiple fields
+        $conditions = [];
+        foreach ($columns as $column) {
+            $conditions[] = "$column LIKE '%$value%'";
+        }
+
+        // Add condition for full name search (concatenation of first and last name)
+        $conditions[] = "CONCAT(patient_name, ' ', patient_lastname1) LIKE '%$value%'";
+
+        // Create the full query
+        $query = "SELECT * FROM " . static::$tabla . " WHERE (" . implode(' OR ', $conditions) . ")";
+        
+        // Execute the query
+        $resultado = self::consultarSQL($query);
+        
+        return $resultado;
+    }
     public static function consultarSQL($query){
         //Consultar la base de datos
         $resultado = self::$db->query($query);

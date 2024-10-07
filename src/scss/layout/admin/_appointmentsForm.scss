@@ -1,0 +1,105 @@
+.form-buttons {
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-bottom: 2rem;
+    }
+
+.formulario__appointments__admin{
+
+    fieldset {
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        padding: 15px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        background-color: #F8FAFC;
+        border-radius: 1rem;
+
+        table{
+            width: 100%;
+            
+            th{
+                min-width: 20rem;
+                
+            }
+            td{
+                
+                .campo_appointments{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    legend {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    .two-col {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .campo_appointments {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        input,
+        select{
+            &:disabled{
+                background-color: #ccc;
+                cursor: not-allowed;
+                color: $negro;
+            }
+        }
+        &__check{
+            flex-direction: row;
+            margin-bottom: 0;
+            align-items: center;
+        }
+    }
+
+    .campo_appointments label {
+        margin-bottom: 5px;
+        color: $negro;
+        font-weight: $bold;
+    }
+
+    .campo_appointments input,
+    .campo_appointments select,
+    .campo_appointments textarea {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+    }
+
+    .housecall_fields,
+    .symptom_fields{
+        height: auto;
+        opacity: 1;
+    }
+    
+
+    button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    input:disabled{
+        background-color: #ccc;
+        cursor: not-allowed;
+        color: $black;
+    }
+}

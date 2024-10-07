@@ -8,6 +8,8 @@ use Model\Testimonial;
 class TestimonialsController{
 
     public static function listado(Router $router){
+        session_start();
+        isAuth();
 
         $testimonials = Testimonial::all();
 
@@ -18,6 +20,8 @@ class TestimonialsController{
     }
 
     public static function crear(Router $router){
+        session_start();
+        isAuth();
 
         $testimonial = new Testimonial();
         
@@ -48,6 +52,8 @@ class TestimonialsController{
     }
 
     public static function actualizar(Router $router){
+        session_start();
+        isAuth();
 
         $id = validarORedireccionar('/configuracion');
 
@@ -89,7 +95,9 @@ class TestimonialsController{
     }
 
     public static function eliminar(Router $router){
-        
+        session_start();
+        isAuth();
+              
         if($_SERVER['REQUEST_METHOD'] === 'POST' ){
             
             $id = $_POST['id'];

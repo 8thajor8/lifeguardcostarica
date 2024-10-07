@@ -8,6 +8,8 @@ use Model\AppointmentStatus;
 class AppointmentStatusController{
 
     public static function listado(Router $router){
+        session_start();
+        isAuth();
 
         $statuses = AppointmentStatus::all();
 
@@ -21,6 +23,8 @@ class AppointmentStatusController{
     }
 
     public static function crear(Router $router){
+        session_start();
+        isAuth();
 
         $status = new AppointmentStatus();
         
@@ -54,7 +58,9 @@ class AppointmentStatusController{
     }
 
     public static function actualizar(Router $router){
-
+        session_start();
+        isAuth();
+        
         $id = validarORedireccionar('/configuracion');
 
         //Consulta datos de propiedad
@@ -98,7 +104,8 @@ class AppointmentStatusController{
     }
 
     public static function eliminar(Router $router){
-        
+        session_start();
+        isAuth();
         if($_SERVER['REQUEST_METHOD'] === 'POST' ){
             
             $id = $_POST['id'];

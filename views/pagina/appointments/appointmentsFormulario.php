@@ -154,6 +154,7 @@
                 min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
                 id="date_symptoms"
                 name="date_symptoms"
+                value="<?php echo $appointment->date_symptoms?>"
             />
         </div>
     </div>
@@ -203,11 +204,7 @@
         <input type="time" id="time_appointment" name="time_appointment" step="1800" value="<?php echo s($appointment->time_appointment); ?>" >
     </div>
 
-    <div class="submit_button">
-        <input type="submit" value="Schedule Appointment" class="boton-azul-flex">
-    </div>
-
-</fieldset>
+    
 
 
        

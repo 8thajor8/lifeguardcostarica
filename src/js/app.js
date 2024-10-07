@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function iniciarApp(){
     navegacionFija();
-    
+    enableForm();
     eventListeners();
+    
     if(inicio){
         scrollNav();
         restaltarEnlace();
@@ -528,4 +529,52 @@ function scheduleSuccess(){
     }
 }
 
+function enableForm(){
 
+    const form = document.getElementById('formulario__appointments__admin');
+    
+    if(form){
+        const editButton = document.getElementById('editButton');
+        const inputs = form.querySelectorAll('input, select');
+
+    inputs.forEach(input => {
+        input.setAttribute('disabled', true);
+    });
+    // Enable all fields when "Edit" button is clicked
+    editButton.addEventListener('click', () => {
+        inputs.forEach(input => {
+            input.removeAttribute('disabled');
+        });
+        
+        editButton.setAttribute('disabled', true);
+    });
+    }
+    
+}
+
+function mostrarModal(reporteId){
+    // Get the modal
+    var modal = document.getElementById("uploadModal");
+    document.getElementById('verified_report').value = '';
+    if(modal){
+       
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the span (button), open the modal
+        modal.style.display = "block";
+        
+        document.getElementById("reporte_id").value = reporteId;
+        // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+        // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    }

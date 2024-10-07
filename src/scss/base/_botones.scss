@@ -4,10 +4,35 @@
 
 .boton-amarillo-block{
     @include boton($amarillo, block);
+    
+}
+.boton-amarillo-flex{
+    @include boton($amarillo, flex);
+    margin: 1.5rem auto;
+    justify-content: center;
+    @include tablet{
+        max-width: 60%;
+    }
+    
 }
 
 .boton-verde{
     @include boton($verde, inline-block);
+}
+
+.boton-verde-block{
+    @include boton($verde, block);
+    
+}
+
+
+.boton-verde-flex{
+    @include boton($verde, flex);
+    margin: 1.5rem auto;
+    justify-content: center;
+    @include tablet{
+        max-width: 60%;
+    }
 }
 
 .boton-rojo-block{
