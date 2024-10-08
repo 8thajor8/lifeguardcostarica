@@ -19,7 +19,7 @@ class MYPDF extends TCPDF {
         $xPosition = ($pageWidth - $imageWidth) / 2; 
 
            // Logo
-        $image_file = '/build/img/logo.png';
+        $image_file = __DIR__ . '/logo.png';
         $this->Image($image_file, $xPosition, 10, $imageWidth, '', 'PNG', '', 'C', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', 'B', 20);
@@ -90,6 +90,7 @@ class reportGenerator
         $html .= '<div></div>';
 
         if ($reporte->time_1 || $reporte->time_2 || $reporte->time_3 || $reporte->time_4) {
+            $html .= '<div><h2 style="color:#0f3973;">Signos Vitales</h2>';
             $html .= '<div><h2 style="color:#0f3973;">Signos Vitales</h2>';
 
             
