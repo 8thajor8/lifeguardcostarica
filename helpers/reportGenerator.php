@@ -19,7 +19,7 @@ class MYPDF extends TCPDF {
         $xPosition = ($pageWidth - $imageWidth) / 2; 
 
            // Logo
-        $image_file = $_SERVER['DOCUMENT_ROOT'] . '/build/img/logo.png';
+        $image_file = '/build/img/logo.png';
         $this->Image($image_file, $xPosition, 10, $imageWidth, '', 'PNG', '', 'C', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', 'B', 20);
