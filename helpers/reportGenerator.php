@@ -19,7 +19,7 @@ class MYPDF extends TCPDF {
         $xPosition = ($pageWidth - $imageWidth) / 2; 
 
            // Logo
-        $image_file = 'build/img/logo.png';
+        $image_file = '/build/img/logo.png';
         if (!file_exists($image_file)) {
             die("Logo image not found at: " . $image_file);
         }
