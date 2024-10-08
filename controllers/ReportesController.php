@@ -5,6 +5,8 @@ use MVC\Router;
 use Model\Titulo;
 use Model\Reporte;
 use Model\Usuario;
+use Model\Paciente;
+use Model\PacienteReporte;
 use Helper\reportGenerator;
 
 
@@ -17,10 +19,8 @@ class ReportesController{
         isAuth();
 
         $reportes = Reporte::all();
+        
 
-        foreach($reportes as $reporte){
-             $reporte->doctor = Usuario::find($reporte->doctor);
-        }
 
         $errores = Reporte::getErrores();
         
@@ -32,7 +32,8 @@ class ReportesController{
 
         if (!empty($searchname)) {
             $searchname = trim($searchname); // Remove whitespace from search term
-            $reportes = Reporte::searchByFields(['patient_name','patient_lastname1'], $searchname);     
+            $reportes = Reporte::searchByFieldsReference(['patient_name','patient_lastname1'], 'pacientes', 'patient_id', 'id', $searchname);     
+            
         }
 
             // Apply status filter if provided
@@ -41,6 +42,12 @@ class ReportesController{
                 return $reporte->status === $status;
             });
             
+        }
+
+        foreach($reportes as $reporte){
+            $reporte->doctor = Usuario::find($reporte->doctor);
+            $reporte->patient_id = Paciente::find($reporte->patient_id);
+            $reporte->creado_por = Usuario::find($reporte->creado_por);
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -90,12 +97,15 @@ class ReportesController{
 
     public static function crear(Router $router){
         session_start();
+        
         isAuth();
 
         $reporte = new Reporte();
         
         $errores = Reporte::getErrores();
+        $pacientes = Paciente::allOrder('patient_name', 'ASC');
         $usuarios = Usuario::all();
+        $paciente = new Paciente();
     
         if($_SERVER['REQUEST_METHOD']==='POST'){
             
@@ -106,7 +116,7 @@ class ReportesController{
             // Define an array of time field names
             $timeFields = ['time_1', 'time_2', 'time_3', 'time_4'];
 
-    // Iterate through the time fields and check their values
+            // Iterate through the time fields and check their values
             foreach ($timeFields as $field) {
                 $timeValues[$field] = isset($_POST[$field]) && !empty($_POST[$field]) ? $_POST[$field] : null;
             }
@@ -117,8 +127,20 @@ class ReportesController{
             if(empty($errores)){
 
                 $reporte->status = 0;
-                $reporte->guardar();
+                $reporte->creado_por = $_SESSION['id'];
                 
+                $resultado = $reporte->guardar();
+               
+                $datos = [
+                    'patient_id' => (int) $reporte->patient_id,
+                    'reporte_id' => (int) $resultado['id']
+                ];
+
+                
+                $reporte_paciente = new PacienteReporte($datos);
+                
+                $reporte_paciente->guardar();
+
                 header('Location: /reportes/listado?resultado=1');
                     
             }
@@ -128,7 +150,9 @@ class ReportesController{
         $router->render('admin/reportes/reportesCrear', [
             'reporte' => $reporte,
             'errores' => $errores,
-            'usuarios'=> $usuarios
+            'usuarios'=> $usuarios,
+            'pacientes'=> $pacientes,
+            'paciente'=> $paciente
         ]);
     }
 
@@ -141,10 +165,9 @@ class ReportesController{
 
         //Consulta datos de propiedad
         $reporte = Reporte::find($id);
-        $usuarios = Usuario::all();
-        
-        //Declaro Variable de errores de validacion de formulario
         $errores = Reporte::getErrores();
+        $pacientes = Paciente::all();
+        $usuarios = Usuario::all();
 
         //Capturo los datos al hacer el submit
         if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -166,6 +189,7 @@ class ReportesController{
 
                 $reporte->guardar();
 
+                
                 header('Location: /reportes/listado?resultado=2');
             }
 
@@ -176,7 +200,9 @@ class ReportesController{
         $router->render('admin/reportes/reportesActualizar', [
             'reporte' => $reporte,
             'usuarios'=> $usuarios,
-            'errores' => $errores]);
+            'pacientes'=> $pacientes,
+            'errores' => $errores
+        ]);
     }
 
     public static function descargar(Router $router) {
@@ -188,6 +214,7 @@ class ReportesController{
         //Consulta datos de propiedad
         $reporte = Reporte::find($id);
         $reporte->doctor = Usuario::find($reporte->doctor);
+        $reporte->patient_id = Paciente::find($reporte->patient_id);
         $reporte->doctor->user_titulo = Titulo::find($reporte->doctor->user_titulo);
         if ($reporte) {
         

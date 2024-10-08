@@ -9,6 +9,7 @@ use Controllers\ReportesController;
 use Controllers\UsuariosController;
 use Controllers\PacientesController;
 use Controllers\ServiciosController;
+use Controllers\APIPacientesController;
 use Controllers\AppointmentsController;
 use Controllers\TestimonialsController;
 use Controllers\AppointmentStatusController;
@@ -69,6 +70,7 @@ $router->get('/pacientes/crear', [PacientesController::class, 'crear']);
 $router->post('/pacientes/crear', [PacientesController::class, 'crear']);
 $router->get('/pacientes/actualizar', [PacientesController::class, 'actualizar']);
 $router->post('/pacientes/actualizar', [PacientesController::class, 'actualizar']);
+$router->post('/api/pacientes', [APIPacientesController::class, 'guardar']);
 
 //Reportes
 $router->get('/reportes/listado', [ReportesController::class, 'listado']);

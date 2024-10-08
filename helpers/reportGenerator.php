@@ -43,7 +43,7 @@ class reportGenerator
         $pdf->SetKeywords('TCPDF, PDF, reporte, medical');
 
         // Set default header and footer data
-        $pdf->setHeaderData(PDF_HEADER_LOGO, 30, 'Reporte Médico', "Paciente: {$reporte->patient_name} {$reporte->patient_lastname1}");
+        $pdf->setHeaderData(PDF_HEADER_LOGO, 30, 'Reporte Médico', "Paciente: {$reporte->patient_id->patient_name} {$reporte->patient_id->patient_lastname1}");
         $pdf->SetMargins(15, 40, 15);
         // Add a page
         $tableWidth = 10; // Table width in percentage
@@ -60,10 +60,10 @@ class reportGenerator
 
         // Sample data for the table using string concatenation
         $data = [
-            ['<strong>Paciente:</strong> ' . $reporte->patient_name . ' ' . $reporte->patient_lastname1, '<strong>Fecha de Atencion:</strong> ' . $reporte->date_report],
-            ['<strong>ID Paciente:</strong> ' . $reporte->id_number, '<strong>Hora de Atencion:</strong> ' . $reporte->time_report],
-            ['<strong>Genero:</strong> ' . ($reporte->gender == 'male' ? 'Masculino' : 'Femenino') , '<strong>Lugar de Atencion:</strong> ' . $reporte->location],
-            ['<strong>Fecha de Nacimiento:</strong> ' . $reporte->dob, '<strong>Nacionalidad:</strong> ' . $reporte->nationality],
+            ['<strong>Paciente:</strong> ' . $reporte->patient_id->patient_name . ' ' . $reporte->patient_id->patient_lastname1, '<strong>Fecha de Atencion:</strong> ' . $reporte->date_report],
+            ['<strong>ID Paciente:</strong> ' . $reporte->patient_id->id_number, '<strong>Hora de Atencion:</strong> ' . $reporte->time_report],
+            ['<strong>Genero:</strong> ' . ($reporte->patient_id->gender == 'male' ? 'Masculino' : 'Femenino') , '<strong>Lugar de Atencion:</strong> ' . $reporte->location],
+            ['<strong>Fecha de Nacimiento:</strong> ' . $reporte->patient_id->dob, '<strong>Nacionalidad:</strong> ' . $reporte->patient_id->nationality],
         ];
 
         // Loop through data and create rows

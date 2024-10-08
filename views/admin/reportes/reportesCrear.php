@@ -25,4 +25,22 @@
 
     </form>
 
+    <div id="pacienteModal" class="modal">
+        <div class="modal-content-admin" id="modal-paciente-api">
+            <span class="close">&times;</span>
+            <h2>Crear Paciente</h2>
+            <div id="error-container"></div>
+            <form class="formulario__appointments__admin formulario_modal" id="crear_paciente_modal" method="POST" >
+        
+                <?php include __DIR__ .  '/../pacientes/pacientesFormulario.php' ?>
+
+               <div class="contenedor_button_modal">
+                    <button type="button" onclick="crearPaciente()">Crear Paciente</button>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+
 </main>

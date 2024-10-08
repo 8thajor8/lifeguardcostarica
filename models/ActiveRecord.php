@@ -22,7 +22,7 @@ class ActiveRecord{
             $resultado = $this->actualizar();
 
         } else{ //sino, estoy creando uno nuevo
-
+            
             $resultado = $this->crear();
 
         }
@@ -48,7 +48,7 @@ class ActiveRecord{
 
         $query .= join(', ', $values);
         $query .= ")";
-       
+        
         $resultado = self::$db->query($query);
 
         return [
@@ -101,6 +101,7 @@ class ActiveRecord{
     //Identificar y unir atributos de la BD
     public function atributos(){
         $atributos = [];
+       
         foreach(static::$columnasBD as $columna){
             if($columna === 'id') continue;
             $atributos[$columna] = $this->$columna;
@@ -111,9 +112,9 @@ class ActiveRecord{
 
     //Sanitizar datos
     public function sanitizarAtributos(){
-
         $atributos = $this->atributos();
         $sanitizado = [];
+        
         foreach ($atributos as $key => $value){
 
             $sanitizado[$key] = is_null($value) ? NULL : self::$db->escape_string($value);
@@ -165,6 +166,13 @@ class ActiveRecord{
         $resultado = self::consultarSQL($query);
         return $resultado;
     }
+    
+    // Obtener todos los Registros segun algun orden
+    public static function allOrder($columna, $orden = 'DESC') {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY ${columna} ${orden}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
 
     public static function get($cantidad){
         $query = "SELECT * FROM " . static::$tabla . " LIMIT " . $cantidad;
@@ -208,11 +216,38 @@ class ActiveRecord{
         // Create the full query
         $query = "SELECT * FROM " . static::$tabla . " WHERE (" . implode(' OR ', $conditions) . ")";
         
+        
         // Execute the query
         $resultado = self::consultarSQL($query);
         
         return $resultado;
     }
+
+    public static function searchByFieldsReference($columns, $foreignTable, $foreignColumn, $foreignId, $value) {
+        // Sanitize input to prevent SQL injection
+        $value = htmlspecialchars($value, ENT_QUOTES);
+
+        // Build the query for multiple fields
+        $conditions = [];
+        foreach ($columns as $column) {
+            $conditions[] = "$foreignTable.$column LIKE '%$value%'";
+        }
+
+        // Add condition for full name search (concatenation of first and last name)
+        $conditions[] = "CONCAT($foreignTable.patient_name, ' ', $foreignTable.patient_lastname1) LIKE '%$value%'";
+
+    // Create the full query
+        $query = "SELECT " . static::$tabla . ".* FROM " . static::$tabla 
+            . " JOIN $foreignTable ON " . static::$tabla . ".$foreignColumn = $foreignTable.$foreignId"
+            . " WHERE (" . implode(' OR ', $conditions) . ")";
+        
+        
+        // Execute the query
+        $resultado = self::consultarSQL($query);
+        
+        return $resultado;
+    }
+
     public static function consultarSQL($query){
         //Consultar la base de datos
         $resultado = self::$db->query($query);

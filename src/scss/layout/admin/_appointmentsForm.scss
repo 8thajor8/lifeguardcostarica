@@ -6,6 +6,8 @@
     }
 
 .formulario__appointments__admin{
+    
+    width: 100%;
 
     fieldset {
         border: 1px solid #ccc;
@@ -14,7 +16,8 @@
         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
         background-color: #F8FAFC;
         border-radius: 1rem;
-
+        width: 100%;
+        
         table{
             width: 100%;
             
@@ -29,7 +32,18 @@
                 }
             }
         }
+
     }
+        .table_overflow{
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -5px;
+            margin-left: -5px;  
+            overflow-x: auto;
+           
+        }
 
     legend {
         font-size: 1.2em;

@@ -40,16 +40,17 @@ function navegacionFija() {
     const barra = document.querySelector('.barra')
     const transportation = document.querySelector ('.fixed-scroll')
     
-
-    window.addEventListener('scroll', function(){
-        if(transportation.getBoundingClientRect().bottom < 1){
-            barra.classList.add('fixed')
-           
-        } else{
-            barra.classList.remove('fixed')
+    if(transportation){
+        window.addEventListener('scroll', function(){
+            if(transportation.getBoundingClientRect().bottom < 1){
+                barra.classList.add('fixed')
             
-        }
-    })
+            } else{
+                barra.classList.remove('fixed')
+                
+            }
+        })
+    }
 
 
 }
@@ -578,3 +579,80 @@ function mostrarModal(reporteId){
             }
         }
     }
+
+function mostrarModalPaciente(){
+    // Get the modal
+    var modal = document.getElementById("pacienteModal");
+    
+    if(modal){
+       
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the span (button), open the modal
+        modal.style.display = "block";
+        
+        
+        // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+        // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    }
+
+async function crearPaciente() {
+    
+    var form = document.getElementById('crear_paciente_modal');
+    var formData = new FormData(form);
+
+try {
+        //Peticion hacia la API
+        const url = '/api/pacientes';
+
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+
+        const resultado = await respuesta.json();
+       
+        var errorContainer = document.getElementById('error-container');
+        errorContainer.innerHTML = '';
+        if(resultado.resultado){
+            var pacienteId = resultado.resultado.id;
+            var pacienteNombre = resultado.patient_name;
+            document.getElementById('pacienteModal').style.display = 'none';
+            
+            var selectPaciente = document.getElementById('patient_id'); // Adjust the ID to match your select element
+            var newOption = document.createElement('option');
+
+            newOption.value = pacienteId;
+            newOption.text = pacienteNombre;
+            selectPaciente.appendChild(newOption);
+
+            selectPaciente.value = pacienteId;
+
+            form.reset();
+            
+        } else{
+            resultado.errores.forEach(error => {
+                var errorDiv = document.createElement('div');
+                errorDiv.classList.add('alerta', 'error');
+                errorDiv.innerText = error;
+                errorContainer.appendChild(errorDiv);
+            });
+        }
+    } catch (error) {
+
+        alert('error')
+        
+    }
+   
+}

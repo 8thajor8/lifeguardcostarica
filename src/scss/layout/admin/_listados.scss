@@ -18,6 +18,9 @@
     }
 }
 
+.contenedor_listados{
+    overflow-x: auto;
+}
 table.listados{
     margin-top: 4rem;
     width: 100%;
@@ -51,13 +54,39 @@ table.listados{
     padding: 1rem;
     .list_header{
         display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        .list_botones{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        @include tablet{
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: baseline;
+            .list_botones{
+            
+            flex-direction: row;
+            gap: 2rem;
+        }
+        }
+         button,
+         a{
+                margin-top: 0;
+            }
         .list_filtros{
-            margin-right: 5rem;
+           
             display: flex;
             gap: 2rem;
             align-items: center;
+            flex-direction: column;
+            margin-right: 0;
+            @include tablet{
+                 margin-right: 5rem;
+                 flex-direction: row;
+            }
             input,
             select{
                 padding: 8px;
@@ -68,13 +97,13 @@ table.listados{
             input{
                 min-width: 25rem;
             }
-            button{
-                margin-top: 0;
-            }
+           
         }
     }
 
     table{
+        width: 100%;
+        overflow-x: auto;
         tbody{
             td{
                 padding: 0 1rem;
@@ -84,6 +113,7 @@ table.listados{
                 text-transform: uppercase;
                 font-weight: $black;
                 color: white;
+                white-space: nowrap;
                 }
                 .status-open {
                     background-color: $amarillo; /* Color for status 1 */

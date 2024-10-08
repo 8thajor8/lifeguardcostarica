@@ -65,7 +65,11 @@ public function __construct($args = []){
         if(!$this->gender){
             self::$errores[] = "El genero del paciente es obligatorio";
         }
+
+        return self::$errores;
     }
+
+    
 
 
 }
