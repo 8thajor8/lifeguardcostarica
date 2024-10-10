@@ -1,0 +1,95 @@
+.expediente_fieldset {
+    
+    legend {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: $azul;
+    }
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    padding: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: #F8FAFC;
+    border-radius: 1rem;
+    width: 100%;
+
+    .two-col {
+        @include tablet{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    }
+
+    .campo_appointments {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        p{
+            margin: 0rem  .5rem;
+        }
+    }
+
+    .campo_appointments label {
+        margin-bottom: 5px;
+        color: $negro;
+        font-weight: $bold;
+    }
+}
+.contenedor_listado_expediente{
+    overflow-x: auto; // Horizontal scroll enabled for container
+    width: 100%;
+    margin: 0;
+    padding: 1.5rem;
+    fieldset{
+        margin: 0;
+    }
+    .listado_expediente{
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        width: 100%;
+        border-spacing: 0;
+        
+        thead{
+            tr{
+                
+                
+                th{
+                    border-bottom: 1px $gris solid;
+                    color: darken($gris,20%);
+                    padding: 1rem;
+                    font-size: 1.4rem;
+                    text-transform: uppercase;
+                }
+            }
+            
+        }
+        tbody{
+            td{
+                white-space: nowrap;
+                padding: 0.2rem  1.5rem;
+                text-align: center;
+                
+            }
+        }
+    }
+}
+
+.status{
+    text-transform: uppercase;
+    font-weight: $black;
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: 1.5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.status-finished{
+    background: rgb(21,187,37);
+    background: linear-gradient(131deg, rgba(21,187,37,1) 54%, rgba(12,205,217,1) 100%);
+}
+.status-cancelled{
+    background: rgb(190,22,22);
+    background: linear-gradient(131deg, rgba(190,22,22,1) 54%, rgba(217,194,12,1) 100%);
+    cursor: pointer;
+}

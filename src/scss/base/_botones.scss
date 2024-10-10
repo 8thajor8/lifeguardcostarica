@@ -10,6 +10,7 @@
     @include boton($amarillo, flex);
     margin: 1.5rem auto;
     justify-content: center;
+    
     @include tablet{
         max-width: 60%;
     }
@@ -30,6 +31,7 @@
     @include boton($verde, flex);
     margin: 1.5rem auto;
     justify-content: center;
+    
     @include tablet{
         max-width: 60%;
     }
@@ -50,4 +52,30 @@
 .boton-azul-flex{
     @include boton($azul, flex);
     justify-content: end;
+}
+
+.boton_container{
+    display: flex;
+    margin-bottom: 2rem;
+    @include tablet{
+        justify-content: center;
+    }
+
+    .boton-verde-flex{
+        margin: 0;
+        background: rgb(113,14,133);
+        background: linear-gradient(131deg, rgba(113,14,133,1) 44%, rgba(244,140,249,1) 100%);
+        &:hover{
+            background: darken(rgba(113,14,133,1),10%);
+        }
+    }
+
+    .boton-azul-flex{
+        margin: 0;
+        background: rgb(14,68,133);
+        background: linear-gradient(131deg, rgba(14,68,133,1) 44%, rgba(140,249,180,1) 100%);
+        &:hover{
+            background: darken(rgb(14,68,133),10%);
+        }
+    }
 }

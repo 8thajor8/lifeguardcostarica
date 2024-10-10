@@ -195,9 +195,9 @@ class ActiveRecord{
     }
 
     public static function belongsTo($columna, $valor) {
-    $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
-    $resultado = self::consultarSQL($query);
-    return $resultado ;
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $resultado = self::consultarSQL($query);
+        return $resultado ;
     }
 
     public static function searchByFields($columns, $value) {

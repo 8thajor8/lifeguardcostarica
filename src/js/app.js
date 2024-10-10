@@ -556,8 +556,9 @@ function enableForm(){
 function mostrarModal(reporteId){
     // Get the modal
     var modal = document.getElementById("uploadModal");
-    document.getElementById('verified_report').value = '';
     if(modal){
+        document.getElementById('verified_report').value = '';
+        if(modal){
        
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -578,6 +579,8 @@ function mostrarModal(reporteId){
                 }
             }
         }
+    }
+    
     }
 
 function mostrarModalPaciente(){
@@ -656,3 +659,47 @@ try {
     }
    
 }
+
+
+function diagnosticoField(){
+
+    const diagnosticoContainer = document.getElementById('diagnosticoContainer');
+    const newDiagnosticoDiv = document.createElement('div');
+    newDiagnosticoDiv.classList.add('input_plus');
+    
+    newDiagnosticoDiv.innerHTML = `
+        
+            <input type="text" name="diagnostico[]" />
+            <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+        
+    `;
+    
+    diagnosticoContainer.appendChild(newDiagnosticoDiv);
+
+    // Add event listener to remove button
+    newDiagnosticoDiv.querySelector('.remove-btn').addEventListener('click', function() {
+        diagnosticoContainer.removeChild(newDiagnosticoDiv);
+    });
+}
+
+function planField(){
+
+    const planContainer = document.getElementById('planContainer');
+    const newPlanDiv = document.createElement('div');
+    newPlanDiv.classList.add('input_plus');
+    
+    newPlanDiv.innerHTML = `
+        
+            <input type="text" name="plan[]" />
+            <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+        
+    `;
+    
+    planContainer.appendChild(newPlanDiv);
+
+    // Add event listener to remove button
+    newPlanDiv.querySelector('.remove-btn').addEventListener('click', function() {
+        planContainer.removeChild(newPlanDiv);
+    });
+}
+

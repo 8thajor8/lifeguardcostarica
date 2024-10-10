@@ -1,3 +1,8 @@
+.heading_admin{
+    font-weight: $bold;
+    color: $azul;
+}
+
 .alerta{
     padding: .5rem;
     text-align: center;
@@ -57,20 +62,12 @@ table.listados{
         flex-direction: column;
         justify-content: center;
         gap: 2rem;
-        .list_botones{
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+
         @include tablet{
             flex-direction: row;
             justify-content: space-between;
             align-items: baseline;
-            .list_botones{
-            
-            flex-direction: row;
-            gap: 2rem;
-        }
+
         }
          button,
          a{
@@ -114,6 +111,7 @@ table.listados{
                 font-weight: $black;
                 color: white;
                 white-space: nowrap;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
                 }
                 .status-open {
                     background-color: $amarillo; /* Color for status 1 */
@@ -135,5 +133,24 @@ table.listados{
             
         }
     }
+    
+}
+
+.list_botones{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    @include tablet{
+    flex-direction: row;
+    gap: 2rem;
+    }
+}
+
+.link-listados{
+    color: $azul;
+    font-weight: $black;
+    background-color: $gris;
+    padding: .7rem;
+    border-radius: 1rem;
     
 }

@@ -3,6 +3,9 @@
 namespace Controllers;
 
 use MVC\Router;
+use Model\Titulo;
+use Model\Reporte;
+use Model\Usuario;
 use Model\Paciente;
 
 class PacientesController{
@@ -104,7 +107,7 @@ class PacientesController{
 
                 $paciente->guardar();
 
-                header('Location: /pacientes/listado?resultado=2');
+                header('Location: /pacientes/expediente?id='.$paciente->id.'&resultado=2');
             }
 
             
@@ -115,5 +118,31 @@ class PacientesController{
             'paciente' => $paciente,
             
             'errores' => $errores]);
+    }
+
+    public static function expediente(Router $router){
+
+        session_start();
+        isAuth();
+
+        $id = validarORedireccionar('/pacientes/listado');
+
+        $resultado = $_GET['resultado'] ?? null;
+        //Consulta datos de propiedad
+        $paciente = Paciente::find($id);
+        $reportes = Reporte::belongsTo('patient_id', $id);
+        
+        foreach($reportes as $reporte){
+            $reporte->doctor = Usuario::find($reporte->doctor);
+            $reporte->patient_id = Paciente::find($reporte->patient_id);
+            $reporte->doctor->user_titulo = Titulo::find($reporte->doctor->user_titulo);
+        }
+
+        $router->render('admin/pacientes/pacientesExpediente', [
+            'paciente' => $paciente,
+            'resultado' =>$resultado,
+            'reportes' => $reportes
+            
+        ]);
     }
 }

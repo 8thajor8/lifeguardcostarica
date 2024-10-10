@@ -1,11 +1,11 @@
 <main class="listado_appointments seccion">
 
-    <h1>Pacientes</h1>
+    <h1 class="heading_admin">Pacientes</h1>
     
     <?php if($resultado) { ?> <p class="alerta exito"> <?php echo mostrarNotificacion($resultado); ?></p> <?php } ?>
 
     <div class="list_header">
-        <div>
+        <div class="list_botones">
             <a href="/pacientes/crear" class=" boton-azul"> Nuevo Paciente</a>
             <a href="/configuracion" class=" boton-amarillo"> Volver </a>
         </div>
@@ -51,7 +51,7 @@
                 <td><?php echo $paciente->id_number ?></td>
                                 
                 <td>
-                    <a href="/pacientes/actualizar?id=<?php echo $paciente->id ?>" class="boton-amarillo-flex">Actualizar</a>
+                    <a href="/pacientes/expediente?id=<?php echo $paciente->id ?>" class="boton-verde-flex">Ver Expediente</a>
                 </td>
             </tr>
             <?php endforeach; ?>

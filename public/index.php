@@ -3,10 +3,12 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
+
 use Controllers\PaginasController;
 use Controllers\ClinicasController;
 use Controllers\ReportesController;
 use Controllers\UsuariosController;
+use Controllers\AddendumsController;
 use Controllers\PacientesController;
 use Controllers\ServiciosController;
 use Controllers\APIPacientesController;
@@ -69,6 +71,7 @@ $router->post('/pacientes/listado', [PacientesController::class, 'listado']);
 $router->get('/pacientes/crear', [PacientesController::class, 'crear']);
 $router->post('/pacientes/crear', [PacientesController::class, 'crear']);
 $router->get('/pacientes/actualizar', [PacientesController::class, 'actualizar']);
+$router->get('/pacientes/expediente', [PacientesController::class, 'expediente']);
 $router->post('/pacientes/actualizar', [PacientesController::class, 'actualizar']);
 $router->post('/api/pacientes', [APIPacientesController::class, 'guardar']);
 
@@ -79,7 +82,12 @@ $router->get('/reportes/crear', [ReportesController::class, 'crear']);
 $router->post('/reportes/crear', [ReportesController::class, 'crear']);
 $router->get('/reportes/actualizar', [ReportesController::class, 'actualizar']);
 $router->post('/reportes/actualizar', [ReportesController::class, 'actualizar']);
+$router->get('/reportes/expediente', [ReportesController::class, 'expediente']);
 $router->get('/reportes/descargar', [ReportesController::class, 'descargar']);
+
+//Addendums
+$router->get('/addendum/crear', [AddendumsController::class, 'crear']);
+$router->post('/addendum/crear', [AddendumsController::class, 'crear']);
 
 //Appointments
 $router->get('/appointments/listado', [AppointmentsController::class, 'listado']);

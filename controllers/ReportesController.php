@@ -5,6 +5,7 @@ use MVC\Router;
 use Model\Titulo;
 use Model\Reporte;
 use Model\Usuario;
+use Model\Addendum;
 use Model\Paciente;
 use Model\PacienteReporte;
 use Helper\reportGenerator;
@@ -53,6 +54,7 @@ class ReportesController{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Assuming you have the database connection set up
             $id = $_POST['reporte_id'];
+            
             $reporte = Reporte::find($id);
             
             $nombreReporte = md5( uniqid( rand(), true) ) . ".pdf" ;
@@ -75,8 +77,14 @@ class ReportesController{
                 if (move_uploaded_file($_FILES['verified_report']['tmp_name'], CARPETA_REPORTES . $nombreReporte)) {
                     
                     $reporte->status = 1;
+                    $reporte->date_signed = date('Y-m-d H:i:s');
                     $reporte->guardar();
                    
+                   if($_POST['from_patient'] ==='1'){
+                    
+                    header('Location: /pacientes/expediente?id='.$reporte->patient_id.'&resultado=4');
+                    exit();
+                   }
                     header('Location: /reportes/listado?resultado=4');
 
                 } else {
@@ -106,7 +114,11 @@ class ReportesController{
         $pacientes = Paciente::allOrder('patient_name', 'ASC');
         $usuarios = Usuario::all();
         $paciente = new Paciente();
-    
+        $return_to_patient = false;
+        if(isset($_GET['id'])){
+            $reporte->patient_id = $_GET['id'];
+            $return_to_patient = true;
+        }
         if($_SERVER['REQUEST_METHOD']==='POST'){
             
             $reporte = new Reporte($_POST);
@@ -120,6 +132,17 @@ class ReportesController{
             foreach ($timeFields as $field) {
                 $timeValues[$field] = isset($_POST[$field]) && !empty($_POST[$field]) ? $_POST[$field] : null;
             }
+            
+            //Array diagnostico handling
+            $diagnosticos = $_POST['diagnostico'] ?? [];
+            $diagnosticosString = implode('|', $diagnosticos); // Join with a pipe
+            $reporte->diagnostico = $diagnosticosString;
+            
+            //Array plan handling
+            $planes = $_POST['plan'] ?? [];
+            $planesString = implode('|', $planes); // Join with a pipe
+            $reporte->plan = $planesString;
+            
             //Valido errores
             $errores = $reporte->validar();
     
@@ -129,6 +152,9 @@ class ReportesController{
                 $reporte->status = 0;
                 $reporte->creado_por = $_SESSION['id'];
                 
+                
+                // Set the current timestamp for the 'created_at' field
+                $reporte->date_created = date('Y-m-d H:i:s');
                 $resultado = $reporte->guardar();
                
                 $datos = [
@@ -141,18 +167,23 @@ class ReportesController{
                 
                 $reporte_paciente->guardar();
 
+                if($return_to_patient){
+                    header('Location: /pacientes/expediente?id='.$reporte->patient_id.'&resultado=1');
+                    exit();
+                }
                 header('Location: /reportes/listado?resultado=1');
                     
             }
     
         }
-
+        
         $router->render('admin/reportes/reportesCrear', [
             'reporte' => $reporte,
             'errores' => $errores,
             'usuarios'=> $usuarios,
             'pacientes'=> $pacientes,
-            'paciente'=> $paciente
+            'paciente'=> $paciente,
+            'return_to_patient'=> $return_to_patient
         ]);
     }
 
@@ -168,7 +199,11 @@ class ReportesController{
         $errores = Reporte::getErrores();
         $pacientes = Paciente::all();
         $usuarios = Usuario::all();
-
+        $return_to_patient = false;
+        if(isset($_GET['idpatient'])){
+            $reporte->patient_id = $_GET['idpatient'];
+            $return_to_patient = true;
+        }
         //Capturo los datos al hacer el submit
         if($_SERVER['REQUEST_METHOD']==='POST'){
             
@@ -180,16 +215,29 @@ class ReportesController{
             $reporte->sincronizar($args);
             
             //Hago la validacion de los campos, si estan vacios, se envia el mensaje al array de errores
-
+                        //Array diagnostico handling
+            $diagnosticos = $_POST['diagnostico'] ?? [];
+            $diagnosticosString = implode('|', $diagnosticos); // Join with a pipe
+            $reporte->diagnostico = $diagnosticosString;
+            
+            //Array plan handling
+            $planes = $_POST['plan'] ?? [];
+            $planesString = implode('|', $planes); // Join with a pipe
+            $reporte->plan = $planesString;
             $errores = $reporte->validar();
             
-            
+            if($reporte->status === '1'){
+                $errores[] = "El reporte ya ha sido firmado y no puede ser modificado";
+            }
 
             if(empty($errores)){
 
                 $reporte->guardar();
 
-                
+                if($return_to_patient){
+                    header('Location: /reportes/expediente?id='.$reporte->id.'&resultado=2');
+                    exit();
+                }
                 header('Location: /reportes/listado?resultado=2');
             }
 
@@ -201,7 +249,41 @@ class ReportesController{
             'reporte' => $reporte,
             'usuarios'=> $usuarios,
             'pacientes'=> $pacientes,
-            'errores' => $errores
+            'errores' => $errores,
+            'return_to_patient'=> $return_to_patient
+        ]);
+    }
+
+    public static function expediente(Router $router){
+
+        session_start();
+        isAuth();
+
+        $id = validarORedireccionar('/reportes/listado');
+        $reporte = Reporte::find($id);
+        $addendums = Addendum::belongsTo('reporte_id', $reporte->id);
+
+        $resultado = $_GET['resultado'] ?? null;
+        $listado = $_GET['listado'] ?? null;
+        //Consulta datos de propiedad
+        
+    
+        $reporte->doctor = Usuario::find($reporte->doctor);
+        $reporte->patient_id = Paciente::find($reporte->patient_id);
+        $reporte->doctor->user_titulo = Titulo::find($reporte->doctor->user_titulo);
+        $reporte->diagnostico = explode('|', $reporte->diagnostico);
+        
+        foreach($addendums as $addendum){
+            $addendum->doctor = Usuario::find($addendum->doctor);
+            $addendum->doctor->user_titulo = Titulo::find($addendum->doctor->user_titulo);
+        }
+        
+        $router->render('admin/reportes/reportesExpediente', [
+            'resultado' =>$resultado,
+            'reporte' => $reporte,
+            'addendums' => $addendums,
+            'listado' => $listado
+            
         ]);
     }
 
@@ -216,6 +298,16 @@ class ReportesController{
         $reporte->doctor = Usuario::find($reporte->doctor);
         $reporte->patient_id = Paciente::find($reporte->patient_id);
         $reporte->doctor->user_titulo = Titulo::find($reporte->doctor->user_titulo);
+        $reporte->diagnostico_array = explode('|', $reporte->diagnostico);
+        $reporte->plan_array = explode('|', $reporte->plan);
+        $reporte->addendums = Addendum::belongsTo('reporte_id', $reporte->id);
+        foreach($reporte->addendums as $addendum){
+            $addendum->doctor = Usuario::find($addendum->doctor);
+            $addendum->doctor->user_titulo = Titulo::find($addendum->doctor->user_titulo);
+            $addendum->diagnostico_array = explode('|', $addendum->diagnostico);
+            $addendum->plan_array = explode('|', $addendum->plan);
+        }
+        
         if ($reporte) {
         
         $reportPDF = new reportGenerator();
@@ -224,3 +316,4 @@ class ReportesController{
     }
 
 }
+

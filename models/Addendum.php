@@ -2,10 +2,10 @@
 
 namespace Model;
 
-class Reporte extends ActiveRecord{
+class Addendum extends ActiveRecord{
 
-    protected static $tabla = 'reportes';
-    protected static $columnasBD = ['id', 'patient_id', 'date_report', 'time_report', 'location',
+    protected static $tabla = 'addendums';
+    protected static $columnasBD = ['id', 'patient_id', 'reporte_id', 'date_addendum', 'time_addendum', 'location',
     
     'time_1', 'lpm_1', 'mmhg_1', 'rpm_1', 'temperature_1', 'saturation_1', 'mgdl_1', 'glasgow_1',
     
@@ -15,16 +15,17 @@ class Reporte extends ActiveRecord{
     
     'time_4', 'lpm_4', 'mmhg_4', 'rpm_4', 'temperature_4', 'saturation_4', 'mgdl_4', 'glasgow_4',
     
-    'antecedentes', 'motivo', 'padecimiento', 'objetivo', 'analisis', 'diagnostico', 'plan', 'doctor', 'status',
+    'objetivo', 'analisis', 'diagnostico', 'plan', 'doctor',
     
-    'firmado_id', 'creado_por', 'date_created', 'date_signed'];
+    'creado_por', 'date_created'];
     
 
     public $id;
     public $patient_id;
+    public $reporte_id;
         
-    public $date_report;
-    public $time_report;
+    public $date_addendum;
+    public $time_addendum;
     public $location;
     
     public $time_1;
@@ -63,28 +64,23 @@ class Reporte extends ActiveRecord{
     public $mgdl_4;
     public $glasgow_4;
     
-    public $antecedentes;
-    public $motivo;
-    public $padecimiento;
     public $objetivo;
     public $analisis;
     public $diagnostico;
     public $plan;
     public $doctor;
-    public $status;
 
-    public $firmado_id;
     public $creado_por;
     public $date_created;
-    public $date_signed;
-    
+        
     public function __construct($args = []){
 
         $this->id = $args['id'] ?? NULL;
         $this->patient_id = $args['patient_id'] ?? '';
+        $this->reporte_id = $args['reporte_id'] ?? '';
         
-        $this->date_report = $args['date_report'] ?? '';
-        $this->time_report = $args['time_report'] ?? '';
+        $this->date_addendum = $args['date_addendum'] ?? '';
+        $this->time_addendum = $args['time_addendum'] ?? '';
         $this->location = $args['location'] ?? '';
 
         $this->time_1 = $args['time_1'] ?? '';
@@ -123,20 +119,14 @@ class Reporte extends ActiveRecord{
         $this->mgdl_4 = $args['mgdl_4'] ?? '';
         $this->glasgow_4 = $args['glasgow_4'] ?? '';
         
-        $this->antecedentes = $args['antecedentes'] ?? '';
-        $this->motivo = $args['motivo'] ?? '';
-        $this->padecimiento = $args['padecimiento'] ?? '';
         $this->objetivo = $args['objetivo'] ?? '';
         $this->analisis = $args['analisis'] ?? '';
         $this->diagnostico = $args['diagnostico'] ?? '';
         $this->plan = $args['plan'] ?? '';
         $this->doctor = $args['doctor'] ?? '';
         
-        $this->status = $args['status'] ?? '';
-        $this->firmado_id = $args['firmado_id'] ?? '';
         $this->creado_por = $args['creado_por'] ?? '';
         $this->date_created = $args['date_created'] ?? '';
-        $this->date_signed = $args['date_signed'] ?? '';
         
     }
 
@@ -146,13 +136,12 @@ class Reporte extends ActiveRecord{
             self::$errores[] = "El paciente es obligatorio";
             
         }
-       
-
-        if(!$this->date_report){
+        
+        if(!$this->date_addendum){
             self::$errores[] = "La fecha es obligatoria";
         }
 
-        if(!$this->time_report){
+        if(!$this->time_addendum){
             self::$errores[] = "La hora es obligatoria";
         }
 
@@ -160,10 +149,7 @@ class Reporte extends ActiveRecord{
             self::$errores[] = "La ubicacion es obligatoria";
         }
 
-        if(!$this->motivo){
-            self::$errores[] = "El motivo de consulta es obligatorio";
-        }
-
+        
         if(!$this->diagnostico){
             self::$errores[] = "El diagnostico de consulta es obligatorio";
         }
@@ -178,15 +164,6 @@ class Reporte extends ActiveRecord{
 
         
 
-       
-        return self::$errores;
-    }
-
-    public function validarFirma(){
-
-         if(!$this->firmado_id){
-            self::$errores[] = "El archivo firmado es obligatorio";
-        }
 
         return self::$errores;
     }

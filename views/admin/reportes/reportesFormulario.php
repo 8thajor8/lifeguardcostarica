@@ -1,28 +1,4 @@
-<fieldset>
-    <legend>Informacion del Paciente</legend>
 
-    <div class="two-col">
-        <div class="campo_appointments">
-        
-            <select name="patient_id" id="patient_id">
-                <option value="" <?php echo ($reporte->patient_id == '') ? 'selected' : ''; ?>>-- Seleccione un Paciente --</option>
-                <?php foreach($pacientes as $pacienteSelect)  : ?>
-                
-                    <option <?php echo $reporte->patient_id === $pacienteSelect->id ? 'selected' : '' ?> value="<?php echo s($pacienteSelect->id); ?>"><?php echo s($pacienteSelect->patient_name) . ' ' . s($pacienteSelect->patient_lastname1 . ' ' .s($pacienteSelect->patient_lastname2)) ; ?></option>
-                    
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <button 
-            type="button"
-            class="boton-verde-flex"
-            onclick="(()=> mostrarModalPaciente())();"
-        > &#43; Nuevo Paciente </button>
-
-    </div>
-
-</fieldset>
 
 <fieldset>
     <legend>Datos de Atencion</legend>
@@ -283,24 +259,26 @@
         <textarea name="analisis" id="analisis" rows="4"  ><?php echo s($reporte->analisis); ?></textarea>
     </div>
 
-    <div class="campo_appointments">
-        <label for="diagnostico">Diagnostico:</label>
-        <input
-            type="text"
-            id="diagnostico"
-            name="diagnostico"
-            value="<?php echo s($reporte->diagnostico); ?>"
-        />
+    <div class="campo_appointments" >
+        <label for="diagnostico[]">Diagnostico:</label>
+        <div class="input_plus">
+            <input type="text" id="diagnostico" name="diagnostico[]" value="<?php echo s($reporte->diagnostico); ?>" />
+            <button type="button" id="addDiagnostico" onclick="(()=> diagnosticoField())();" >+</button>
+            
+        </div>
+        <!-- Container to hold new fields -->
+        <div id="diagnosticoContainer"></div> 
     </div>
 
-    <div class="campo_appointments">
-        <label for="plan">Plan:</label>
-        <input
-            type="text"
-            id="plan"
-            name="plan"
-            value="<?php echo s($reporte->plan); ?>"
-        />
+    <div class="campo_appointments" >
+        <label for="plan[]">Plan:</label>
+        <div class="input_plus">
+            <input type="text" id="plan" name="plan[]" value="<?php echo s($reporte->plan); ?>" />
+            <button type="button" id="addPlan" onclick="(()=> planField())();" >+</button>
+            
+        </div>
+        <!-- Container to hold new fields -->
+        <div id="planContainer"></div> 
     </div>
 
 </fieldset>

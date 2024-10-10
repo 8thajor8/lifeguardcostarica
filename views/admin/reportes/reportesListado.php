@@ -1,6 +1,6 @@
 <main class="listado_appointments seccion">
 
-    <h1>Reportes Medicos</h1>
+    <h1 class="heading_admin">Reportes Medicos</h1>
     
     <?php if($resultado) { ?> <p class="alerta exito"> <?php echo mostrarNotificacion($resultado); ?></p> <?php } ?>
     <?php
@@ -15,7 +15,7 @@
     <div class="list_header">
         <div class="list_botones">
             <a href="/reportes/crear" class="boton boton-azul"> Nuevo Reporte</a>
-            <a href="/configuracion" class="boton boton-amarillo"> Volver </a>
+            <a href="/configuracion" class="boton-amarillo"> Volver </a>
         </div>
         
                 <!-- Filter Section -->
@@ -46,6 +46,8 @@
                     <th>Doctor</th>
                     <th>Status</th>
                     <th>Creado Por</th>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha Firmado</th>
                     <th>Acciones</th>
                     
                 </tr>
@@ -55,7 +57,7 @@
                 <?php foreach($reportes as $reporte): ?>
                 <tr>
                     <td><?php echo $reporte->id ?></td>
-                    <td><?php echo $reporte->patient_id->patient_name . " " . $reporte->patient_id->patient_lastname1 ?></td>
+                    <td><a class="link-listados" href="/pacientes/expediente?id=<?php echo $reporte->patient_id->id; ?>"><?php echo $reporte->patient_id->patient_name . " " . $reporte->patient_id->patient_lastname1 ?></a></td>
                     <td><?php 
                     $date = new DateTime($reporte->date_report);
                     $meses = [
@@ -80,9 +82,11 @@
                             
                         </span></td>
                     <td><?php echo $reporte->creado_por->nombre ?></td>
+                    <td><?php echo $reporte->date_created ?></td>
+                    <td><?php echo $reporte->date_signed ?></td>
                     <td>
                         <?php if (intval($reporte->status) === 0){ ?>
-                            <a href="/reportes/actualizar?id=<?php echo $reporte->id ?>" class="boton-amarillo-flex">Actualizar</a>
+                            <a href="/reportes/expediente?id=<?php echo $reporte->id ?>&listado=1" class="boton-amarillo-flex">Detalles</a>
                         
                         <a href="/reportes/descargar?id=<?php echo $reporte->id ?>" target="_blank" class="boton-verde-flex">Descargar</a>
 

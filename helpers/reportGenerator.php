@@ -94,7 +94,7 @@ class reportGenerator
 
         if ($reporte->time_1 || $reporte->time_2 || $reporte->time_3 || $reporte->time_4) {
             $html .= '<div><h2 style="color:#0f3973;">Signos Vitales</h2>';
-            $html .= '<div><h2 style="color:#0f3973;">Signos Vitales</h2>';
+            
 
             
             $html .= '
@@ -257,9 +257,16 @@ class reportGenerator
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
-                        <th style="">' . $reporte->diagnostico . '</th>
-                    </tr>
+                    <tr><td>';
+
+        foreach ($reporte->diagnostico_array as $index => $diagnostico) {
+            $html .= '' . ($index + 1) . '. ' . $diagnostico;
+            if (count($reporte->diagnostico_array) > 1 && $index < count($reporte->diagnostico_array) - 1) {
+                $html .= '<br />';
+            }
+        }
+
+        $html .= '</td></tr>
                 </tbody>
             </table>
         </div>';
@@ -274,9 +281,17 @@ class reportGenerator
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
-                        <th style="">' . $reporte->plan . '</th>
-                    </tr>
+                    <tr><td>';
+
+        foreach ($reporte->plan_array as $index => $plan) {
+            $html .= '' . ($index + 1) . '. ' . $plan;
+            
+            if (count($reporte->plan_array) > 1 && $index < count($reporte->plan_array) - 1) {
+                $html .= '<br />';
+            }
+        }
+
+        $html .= '</td></tr>
                 </tbody>
             </table>
         </div>';
@@ -285,10 +300,208 @@ class reportGenerator
         $html .= '<br /><br /><br /><br /><div style=" font-size:18px; text-align: center;">' . $reporte->doctor->user_titulo->nombre .' ' . $reporte->doctor->nombre . ' <br />';
         $html .= '<span style="font-size: 12px;">' . $reporte->doctor->user_especialidad .'</span><br />';
         $html .= '<span style="font-size: 12px;">' . 'Cod. ' . $reporte->doctor->user_codigo .'</span></div>';
+
+        
+        
+            
+        
+        
         // Output the HTML content
         $pdf->writeHTML($html);
+        foreach($reporte->addendums as $addendum){
+            $pdf->addPage();
 
+            $tableHtmlAddendum = '<table border="0" cellpadding="3" cellspacing="0" style="width: 90%; margin: 10px 50px; border-collapse: collapse;">';
+
+            // Sample data for the table using string concatenation
+            $dataAddendum = [
+                ['<strong>Paciente:</strong> ' . $reporte->patient_id->patient_name . ' ' . $reporte->patient_id->patient_lastname1, '<strong>Fecha de Atencion:</strong> ' . $addendum->date_addendum],
+                ['<strong>ID Paciente:</strong> ' . $reporte->patient_id->id_number, '<strong>Hora de Atencion:</strong> ' . $addendum->time_addendum],
+                ['<strong>Genero:</strong> ' . ($reporte->patient_id->gender == 'male' ? 'Masculino' : 'Femenino') , '<strong>Lugar de Atencion:</strong> ' . $addendum->location],
+                ['<strong>Fecha de Nacimiento:</strong> ' . $reporte->patient_id->dob, '<strong>Nacionalidad:</strong> ' . $reporte->patient_id->nationality],
+            ];
+
+            // Loop through data and create rows
+            foreach ($dataAddendum as $index => $row) {
+                $rowColor = ($index % 2 == 0) ? '#e6f7ff' : '#f9f9f9'; // Alternate colors for rows
+                $tableHtmlAddendum .= '<tr style="background-color: ' . $rowColor . ';">';
+
+                // Set the border for the outer and dividing column
+                $tableHtmlAddendum .= '<td style=" border-right: 1px solid black;">' . $row[0] . '</td>'; // Border for left column
+                $tableHtmlAddendum .= '<td >' . $row[1] . '</td>'; // Border for right column
+                
+                $tableHtmlAddendum .= '</tr>';
+            }
+
+
+            $tableHtmlAddendum .= '</table>';
+            
+            
+            
+            $pdf->Cell($tableCellWidth, 0, '', 0, 0, 'C');
+            
+            $html =  $tableHtmlAddendum ;
+        
+            $html .= '<div><h1 style="text-align: center;">Nota de Evolucion Medica</h1></div>';
+
+            if ($addendum->time_1 || $addendum->time_2 || $addendum->time_3 || $addendum->time_4) {
+                $html .= '<div><h2 style="color:#0f3973;">Signos Vitales</h2>';
+                
+
+                
+                $html .= '
+                    <table border="1" cellpadding="4" cellspacing="0" style="width:60%">
+                        <tbody>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Hora</td>
+                                <td width="15%" style="text-align: center;">' . ($addendum->time_1 ? date("H:i", strtotime($addendum->time_1)) : $addendum->time_1) . '</td>
+                                <td width="15%" style="text-align: center;">' . ($addendum->time_2 ? date("H:i", strtotime($addendum->time_2)) : $addendum->time_2) . '</td>
+                                <td width="15%" style="text-align: center;">' . ($addendum->time_3 ? date("H:i", strtotime($addendum->time_3)) : $addendum->time_3) . '</td>
+                                <td width="15%" style="text-align: center;">' . ($addendum->time_4 ? date("H:i", strtotime($addendum->time_4)) : $addendum->time_4) . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Pulso (lpm)</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->lpm_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->lpm_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->lpm_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->lpm_4 . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Presion Arterial (mmHg)</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mmhg_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mmhg_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mmhg_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mmhg_4 . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Frecuencia Respiratoria (rpm)</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->rpm_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->rpm_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->rpm_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->rpm_4 . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Temperatura (°C)</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->temperature_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->temperature_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->temperature_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->temperature_4 . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Saturación O₂%</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->saturation_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->saturation_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->saturation_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->saturation_4 . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Glicemia (mg/dl)</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mgdl_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mgdl_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mgdl_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->mgdl_4 . '</td>
+                            </tr>
+                            <tr>
+                                <td width="60%" style="font-weight: bold;">Glasgow (puntos)</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->glasgow_1 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->glasgow_2 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->glasgow_3 . '</td>
+                                <td width="15%" style="text-align: center;">' . $addendum->glasgow_4 . '</td>
+                            </tr>
+                        </tbody>
+                    </table></div>
+                ';
+            }
+           
+            if ($addendum->objetivo){
+                $html .= '<div>
+                    <table border="1" cellpadding="4" cellspacing="0">
+                        <thead>
+                            <tr style="background-color: #0f3973;">
+                                <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">OBJETIVO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <th style="">' . $addendum->objetivo . '</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>';
+            }
+
+        if ($addendum->analisis){
+            $html .= '<div>
+                <table border="1" cellpadding="4" cellspacing="0">
+                    <thead>
+                        <tr style="background-color: #0f3973;">
+                            <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">ANALISIS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <th style="">' . $addendum->analisis . '</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>';
+        }
+
+        if ($addendum->diagnostico){
+            $html .= '<div>
+                <table border="1" cellpadding="4" cellspacing="0">
+                    <thead>
+                        <tr style="background-color: #0f3973;">
+                            <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">DIAGNOSTICO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>';
+
+            foreach ($addendum->diagnostico_array as $index => $diagnostico) {
+                $html .= '' . ($index + 1) . '. ' . $diagnostico;
+                if (count($addendum->diagnostico_array) > 1 && $index < count($addendum->diagnostico_array) - 1) {
+                    $html .= '<br />';
+                }
+            }
+
+            $html .= '</td></tr>
+                    </tbody>
+                </table>
+            </div>';
+        }
+
+        if ($addendum->plan){
+            $html .= '<div>
+                <table border="1" cellpadding="4" cellspacing="0">
+                    <thead>
+                        <tr style="background-color: #0f3973;">
+                            <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">PLAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>';
+
+            foreach ($addendum->plan_array as $index => $plan) {
+                $html .= '' . ($index + 1) . '. ' . $plan;
+                
+                if (count($addendum->plan_array) > 1 && $index < count($addendum->plan_array) - 1) {
+                    $html .= '<br />';
+                }
+            }
+
+            $html .= '</td></tr>
+                    </tbody>
+                </table>
+            </div>';
+        }
+
+        $html .= '<br /><br /><br /><br /><div style=" font-size:18px; text-align: center;">' . $addendum->doctor->user_titulo->nombre .' ' . $addendum->doctor->nombre . ' <br />';
+        $html .= '<span style="font-size: 12px;">' . $addendum->doctor->user_especialidad .'</span><br />';
+        $html .= '<span style="font-size: 12px;">' . 'Cod. ' . $addendum->doctor->user_codigo .'</span></div>';
+            $pdf->writeHTML($html);
+        }
         // Output the PDF as a string (for download)
-        return $pdf->Output('reporte_' . $reporte->id . '.pdf', 'I'); // 'I' for inline display, 'D' for download
+        return $pdf->Output('Reporte Medico ' . $reporte->patient_id->patient_name . ' ' .$reporte->patient_id->patient_lastname1.'.pdf', 'I'); // 'I' for inline display, 'D' for download
     }
 }
