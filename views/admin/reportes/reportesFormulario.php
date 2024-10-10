@@ -230,17 +230,12 @@
 
     
     <div class="campo_appointments">
-        <label for="antecedentes">Antecedentes Medicos Relevantes:</label>
-        <input
-            type="text"
-            id="antecedentes"
-            name="antecedentes"
-            value="<?php echo s($reporte->antecedentes); ?>"
-        />
+        <label for="antecedentes">Antecedentes Medicos:</label>
+        <textarea name="antecedentes" id="antecedentes" rows="4" placeholder="Antecedentes Medicos"  ><?php echo s($reporte->antecedentes); ?></textarea>
     </div>
-
+    
     <div class="campo_appointments">
-        <label for="motivo" >Motivo:</label>
+        <label for="motivo" >Motivo de Consulta:</label>
         <textarea name="motivo" id="motivo" rows="4" placeholder="Motivo de Consulta"  ><?php echo s($reporte->motivo); ?></textarea>
     </div>
 
