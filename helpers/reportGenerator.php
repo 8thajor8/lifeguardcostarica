@@ -164,15 +164,15 @@ class reportGenerator
         
         if ($reporte->antecedentes){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">ANTECEDENTES MEDICOS</th>
+                    <tr style="">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">ANTECEDENTES MEDICOS</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <th style="">' . $reporte->antecedentes . '</th>
+                        <th style="">' . nl2br(htmlspecialchars($reporte->antecedentes)) . '</th>
                     </tr>
                 </tbody>
             </table>
@@ -181,15 +181,15 @@ class reportGenerator
 
         if ($reporte->motivo){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">MOTIVO DE CONSULTA</th>
+                    <tr style=";">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">MOTIVO DE CONSULTA</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <th style="">' . $reporte->motivo . '</th>
+                        <th style="">' . nl2br(htmlspecialchars($reporte->motivo)) . '</th>
                     </tr>
                 </tbody>
             </table>
@@ -199,15 +199,15 @@ class reportGenerator
 
         if ($reporte->padecimiento){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">PADECIMIENTO</th>
+                    <tr style="">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">PADECIMIENTO</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <th style="">' . $reporte->padecimiento . '</th>
+                        <th style="">' . nl2br(htmlspecialchars($reporte->padecimiento)) . '</th>
                     </tr>
                 </tbody>
             </table>
@@ -216,15 +216,15 @@ class reportGenerator
 
         if ($reporte->objetivo){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">OBJETIVO</th>
+                    <tr style="">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">OBJETIVO</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <th style="">' . $reporte->objetivo . '</th>
+                        <th style="">' . nl2br(htmlspecialchars($reporte->objetivo)) . '</th>
                     </tr>
                 </tbody>
             </table>
@@ -233,15 +233,15 @@ class reportGenerator
 
         if ($reporte->analisis){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">ANALISIS</th>
+                    <tr style="">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">ANALISIS</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr >
-                        <th style="">' . $reporte->analisis . '</th>
+                        <th style="">' . nl2br(htmlspecialchars($reporte->analisis)) . '</th>
                     </tr>
                 </tbody>
             </table>
@@ -250,10 +250,10 @@ class reportGenerator
 
         if ($reporte->diagnostico){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">DIAGNOSTICO</th>
+                    <tr style="">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">DIAGNOSTICO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -274,10 +274,10 @@ class reportGenerator
 
         if ($reporte->plan){
         $html .= '<div>
-            <table border="1" cellpadding="4" cellspacing="0">
+            <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
-                    <tr style="background-color: #0f3973;">
-                        <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">PLAN</th>
+                    <tr style="">
+                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">PLAN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -299,7 +299,9 @@ class reportGenerator
 
         $html .= '<br /><br /><br /><br /><div style=" font-size:18px; text-align: center;">' . $reporte->doctor->user_titulo->nombre .' ' . $reporte->doctor->nombre . ' <br />';
         $html .= '<span style="font-size: 12px;">' . $reporte->doctor->user_especialidad .'</span><br />';
+        if ($reporte->doctor->user_codigo){
         $html .= '<span style="font-size: 12px;">' . 'Cod. ' . $reporte->doctor->user_codigo .'</span></div>';
+        }
 
         
         
@@ -415,15 +417,15 @@ class reportGenerator
            
             if ($addendum->objetivo){
                 $html .= '<div>
-                    <table border="1" cellpadding="4" cellspacing="0">
+                    <table border="0" cellpadding="4" cellspacing="0">
                         <thead>
-                            <tr style="background-color: #0f3973;">
-                                <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">OBJETIVO</th>
+                            <tr style="">
+                                <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">OBJETIVO</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr >
-                                <th style="">' . $addendum->objetivo . '</th>
+                                <th style="">' . nl2br(htmlspecialchars($addendum->objetivo)) . '</th>
                             </tr>
                         </tbody>
                     </table>
@@ -432,15 +434,15 @@ class reportGenerator
 
         if ($addendum->analisis){
             $html .= '<div>
-                <table border="1" cellpadding="4" cellspacing="0">
+                <table border="0" cellpadding="4" cellspacing="0">
                     <thead>
-                        <tr style="background-color: #0f3973;">
-                            <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">ANALISIS</th>
+                        <tr style="">
+                            <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">ANALISIS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr >
-                            <th style="">' . $addendum->analisis . '</th>
+                            <th style="">' . nl2br(htmlspecialchars($addendum->analisis)) . '</th>
                         </tr>
                     </tbody>
                 </table>
@@ -449,10 +451,10 @@ class reportGenerator
 
         if ($addendum->diagnostico){
             $html .= '<div>
-                <table border="1" cellpadding="4" cellspacing="0">
+                <table border="0" cellpadding="4" cellspacing="0">
                     <thead>
-                        <tr style="background-color: #0f3973;">
-                            <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">DIAGNOSTICO</th>
+                        <tr style="">
+                            <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">DIAGNOSTICO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -473,10 +475,10 @@ class reportGenerator
 
         if ($addendum->plan){
             $html .= '<div>
-                <table border="1" cellpadding="4" cellspacing="0">
+                <table border="0" cellpadding="4" cellspacing="0">
                     <thead>
-                        <tr style="background-color: #0f3973;">
-                            <th style="color: white; text-align: center; text-transform: uppercase; font-weight:bold">PLAN</th>
+                        <tr style="">
+                            <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">PLAN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -498,7 +500,9 @@ class reportGenerator
 
         $html .= '<br /><br /><br /><br /><div style=" font-size:18px; text-align: center;">' . $addendum->doctor->user_titulo->nombre .' ' . $addendum->doctor->nombre . ' <br />';
         $html .= '<span style="font-size: 12px;">' . $addendum->doctor->user_especialidad .'</span><br />';
+        if($addendum->doctor->user_codigo){
         $html .= '<span style="font-size: 12px;">' . 'Cod. ' . $addendum->doctor->user_codigo .'</span></div>';
+        }
             $pdf->writeHTML($html);
         }
         // Output the PDF as a string (for download)
