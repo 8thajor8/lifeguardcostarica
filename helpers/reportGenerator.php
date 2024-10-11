@@ -48,10 +48,10 @@ class reportGenerator
         // Set default header and footer data
         $pdf->setHeaderData(PDF_HEADER_LOGO, 30, 'Reporte Médico', "Paciente: {$reporte->patient_id->patient_name} {$reporte->patient_id->patient_lastname1}");
         $pdf->SetMargins(15, 40, 15);
-        // Add a page
-        $tableWidth = 10; // Table width in percentage
-        $vitalsWidth = 15; // Table width in percentage
-        $tableCellWidth = $pdf->getPageWidth() * ($tableWidth / 100); // Get the actual width based on the page size
+        $tableWidth = 80; // Table width in percentage (adjusted to 80%)
+        $vitalsWidth = 15; // Table width in percentage (you can keep this if needed)
+        
+
 
         // Add a new page or use the existing one
         $pdf->AddPage();
@@ -59,7 +59,7 @@ class reportGenerator
 
         
 
-        $tableHtml = '<table border="0" cellpadding="3" cellspacing="0" style="width: 90%; margin: 10px 50px; border-collapse: collapse;">';
+        $tableHtml = '<table border="0" cellpadding="3" cellspacing="0" style="width:650px; border-collapse: separate; border: 3px solid black;">';
 
         // Sample data for the table using string concatenation
         $data = [
@@ -71,11 +71,12 @@ class reportGenerator
 
         // Loop through data and create rows
         foreach ($data as $index => $row) {
-            $rowColor = ($index % 2 == 0) ? '#e6f7ff' : '#f9f9f9'; // Alternate colors for rows
+            $rowColor = '#fFF'; // Alternate colors for rows
             $tableHtml .= '<tr style="background-color: ' . $rowColor . ';">';
 
             // Set the border for the outer and dividing column
-            $tableHtml .= '<td style=" border-right: 1px solid black;">' . $row[0] . '</td>'; // Border for left column
+            $tableHtml .= '<td style="border-right: 1px solid black;">' . $row[0] . '</td>'; // Border for left column
+            $tableHtml .= '<td style=" width:10px;"></td>'; // Border for right column
             $tableHtml .= '<td >' . $row[1] . '</td>'; // Border for right column
             
             $tableHtml .= '</tr>';
@@ -85,8 +86,8 @@ class reportGenerator
         $tableHtml .= '</table>';
         
         
+        $pdf->Cell(15, 0, '', 0, 0, 'C');
         
-        $pdf->Cell($tableCellWidth, 0, '', 0, 0, 'C');
         
         $html =  $tableHtml ;
        
@@ -167,7 +168,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style="">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">ANTECEDENTES MEDICOS</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">ANTECEDENTES MEDICOS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -184,7 +185,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style=";">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">MOTIVO DE CONSULTA</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">MOTIVO DE CONSULTA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -202,7 +203,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style="">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">PADECIMIENTO</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">PADECIMIENTO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -219,7 +220,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style="">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">OBJETIVO</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">OBJETIVO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -236,7 +237,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style="">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">ANALISIS</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">ANALISIS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -253,7 +254,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style="">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">DIAGNOSTICO</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">DIAGNOSTICO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -277,7 +278,7 @@ class reportGenerator
             <table border="0" cellpadding="4" cellspacing="0">
                 <thead>
                     <tr style="">
-                        <th style="text-transform: uppercase; font-weight:bold; font-size:15px">PLAN</th>
+                        <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size:15px">PLAN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -313,7 +314,7 @@ class reportGenerator
         foreach($reporte->addendums as $addendum){
             $pdf->addPage();
 
-            $tableHtmlAddendum = '<table border="0" cellpadding="3" cellspacing="0" style="width: 90%; margin: 10px 50px; border-collapse: collapse;">';
+            $tableHtmlAddendum = '<table border="0" cellpadding="3" cellspacing="0" style="width:650px; border-collapse: separate; border: 3px solid black;">';
 
             // Sample data for the table using string concatenation
             $dataAddendum = [
@@ -325,22 +326,25 @@ class reportGenerator
 
             // Loop through data and create rows
             foreach ($dataAddendum as $index => $row) {
-                $rowColor = ($index % 2 == 0) ? '#e6f7ff' : '#f9f9f9'; // Alternate colors for rows
+                $rowColor = '#FFF'; // Alternate colors for rows
                 $tableHtmlAddendum .= '<tr style="background-color: ' . $rowColor . ';">';
 
                 // Set the border for the outer and dividing column
                 $tableHtmlAddendum .= '<td style=" border-right: 1px solid black;">' . $row[0] . '</td>'; // Border for left column
+                $tableHtmlAddendum .= '<td style=" width:10px;"></td>'; // Border for right column
                 $tableHtmlAddendum .= '<td >' . $row[1] . '</td>'; // Border for right column
                 
                 $tableHtmlAddendum .= '</tr>';
             }
 
 
+
+
             $tableHtmlAddendum .= '</table>';
             
             
             
-            $pdf->Cell($tableCellWidth, 0, '', 0, 0, 'C');
+            $pdf->Cell(15, 0, '', 0, 0, 'C');
             
             $html =  $tableHtmlAddendum ;
         
@@ -420,7 +424,7 @@ class reportGenerator
                     <table border="0" cellpadding="4" cellspacing="0">
                         <thead>
                             <tr style="">
-                                <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">OBJETIVO</th>
+                                <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size: 15px">OBJETIVO</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -437,7 +441,7 @@ class reportGenerator
                 <table border="0" cellpadding="4" cellspacing="0">
                     <thead>
                         <tr style="">
-                            <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">ANALISIS</th>
+                            <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size: 15px">ANALISIS</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -454,7 +458,7 @@ class reportGenerator
                 <table border="0" cellpadding="4" cellspacing="0">
                     <thead>
                         <tr style="">
-                            <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">DIAGNOSTICO</th>
+                            <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size: 15px">DIAGNOSTICO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -478,7 +482,7 @@ class reportGenerator
                 <table border="0" cellpadding="4" cellspacing="0">
                     <thead>
                         <tr style="">
-                            <th style="text-transform: uppercase; font-weight:bold; font-size: 15px">PLAN</th>
+                            <th style="color: #0f3973; text-transform: uppercase; font-weight:bold; font-size: 15px">PLAN</th>
                         </tr>
                     </thead>
                     <tbody>
