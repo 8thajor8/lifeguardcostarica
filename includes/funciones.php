@@ -3,6 +3,7 @@
 define('FUNCIONES_URL', __DIR__ . '/funciones.php');
 define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
 define('CARPETA_REPORTES', $_SERVER['DOCUMENT_ROOT'] . '/report_files/');
+define('CARPETA_RELATED_FILES', $_SERVER['DOCUMENT_ROOT'] . '/related_files/');
 
 
 
@@ -42,6 +43,9 @@ function mostrarNotificacion ($codigo){
             break;
         case 4:
             $mensaje = "Reporte subido exitosamente!";
+            break;
+        case 5:
+            $mensaje = "Adjunto subido exitosamente!";
             break;
 
         default:

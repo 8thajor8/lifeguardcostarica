@@ -56,7 +56,7 @@ class reportGenerator
         // Add a new page or use the existing one
         $pdf->AddPage();
 
-
+        
         
 
         $tableHtml = '<table border="0" cellpadding="3" cellspacing="0" style="width:650px; border-collapse: separate; border: 3px solid black;">';
@@ -66,7 +66,8 @@ class reportGenerator
             ['<strong>Paciente:</strong> ' . $reporte->patient_id->patient_name . ' ' . $reporte->patient_id->patient_lastname1, '<strong>Fecha de Atencion:</strong> ' . $reporte->date_report],
             ['<strong>ID Paciente:</strong> ' . $reporte->patient_id->id_number, '<strong>Hora de Atencion:</strong> ' . $reporte->time_report],
             ['<strong>Genero:</strong> ' . ($reporte->patient_id->gender == 'male' ? 'Masculino' : 'Femenino') , '<strong>Lugar de Atencion:</strong> ' . $reporte->location],
-            ['<strong>Fecha de Nacimiento:</strong> ' . $reporte->patient_id->dob, '<strong>Nacionalidad:</strong> ' . $reporte->patient_id->nationality],
+            ['<strong>Fecha de Nacimiento:</strong> ' . $reporte->patient_id->dob, '<strong>Edad:</strong> ' . $reporte->age ],
+            ['<strong>Nacionalidad:</strong> ' . $reporte->patient_id->nationality, '']
         ];
 
         // Loop through data and create rows

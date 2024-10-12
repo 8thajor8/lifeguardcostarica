@@ -81,6 +81,11 @@
         p{
             font-style: italic;
         }
+        label{
+            color: $negro;
+            font-weight: $bold;
+            margin-bottom: 1rem;
+        }
 
         .titulo_notas{
             font-weight: $bold;

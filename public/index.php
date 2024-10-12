@@ -84,6 +84,7 @@ $router->get('/reportes/actualizar', [ReportesController::class, 'actualizar']);
 $router->post('/reportes/actualizar', [ReportesController::class, 'actualizar']);
 $router->get('/reportes/expediente', [ReportesController::class, 'expediente']);
 $router->get('/reportes/descargar', [ReportesController::class, 'descargar']);
+$router->post('/reportes/expediente/adjuntar', [ReportesController::class, 'adjuntar']);
 
 //Addendums
 $router->get('/addendum/crear', [AddendumsController::class, 'crear']);

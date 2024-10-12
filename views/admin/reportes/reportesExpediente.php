@@ -17,37 +17,53 @@
 
         <div class="two-col">
             <div class="campo_appointments">
-                <label for="patient_name">Paciente:</label>
-                <p><?php echo s($reporte->patient_id->patient_name) . ' ' . s($reporte->patient_id->patient_lastname1); ?>" </p>
+                <label >Paciente:</label>
+                <p><?php echo s($reporte->patient_id->patient_name) . ' ' . s($reporte->patient_id->patient_lastname1); ?> </p>
             </div>
             
             <div class="campo_appointments">
-                <label for="id_number">#Pasaporte o ID:</label>
+                <label >#Pasaporte o ID:</label>
                 <p><?php echo s($reporte->patient_id->id_number); ?></p>
             </div>
             
             <div class="campo_appointments">
-                <label for="doctor">Doctor:</label>
-                <p><?php echo $reporte->doctor->user_titulo->nombre . ' ' . $reporte->doctor->nombre ?></p>
+                <label >Edad:</label>
+                <p>
+                     <?php 
+                    // Get the patient's birth date and calculate the age
+                    $dob = new DateTime($reporte->patient_id->dob); // Convert dob to DateTime
+                    $today = new DateTime(); // Get today's date
+                    $age = $today->diff($dob)->y; // Calculate the age difference in years
+
+                    echo s($age); // Safely output the calculated age
+                    ?> años
+                </p>
             </div>
+
+            
             
 
         </div>
         
         <div class="two-col">
             <div class="campo_appointments">
-                <label for="diagnostico">Diagnostico:</label>
+                <label >Doctor:</label>
+                <p><?php echo $reporte->doctor->user_titulo->nombre . ' ' . $reporte->doctor->nombre ?></p>
+            </div>
+            
+            <div class="campo_appointments">
+                <label >Diagnostico:</label>
                 <?php foreach($reporte->diagnostico as $index => $diagnostico){ ?>
                     <p><?php echo ($index + 1 . '. '. $diagnostico); ?></p>
                 <?php } ?>
             </div>
 
              <div class="campo_appointments"> 
-                <label for="status">Estado:</label>
+                <label >Estado:</label>
                     <div class="boton_container" style="justify-content:flex-start"><p class=" status <?php echo intval($reporte->status) === 1 ? 'status-finished' : 'status-cancelled status_label' ?>"
                         data-id="<?php echo $reporte->id; ?>" 
                         <?php if($reporte->status === '0'){ ?>
-                        onclick="(()=> mostrarModal(<?php echo $reporte->id; ?>))();"
+                        onclick="(()=> mostrarModal(<?php echo $reporte->id; ?>, '<?php echo $reporte->patient_id->patient_name . ' '  . $reporte->patient_id->patient_lastname1 ?>'))();"
                         <?php } ?>
                     >
                         <?php echo intval($reporte->status) === 1 ? 'FIRMADO' : 'NO FIRMADO' ?>
@@ -115,6 +131,55 @@
         </fieldset>
     </div>
 
+    <div class="contenedor_listado_expediente">
+        <fieldset class="expediente_fieldset">
+            <legend>Archivos Relacionados</legend>
+            <?php if($relatedFiles) { ?>
+            
+                <table class="listado_expediente">
+                    <thead>
+                        <tr>
+                            
+                            <th>Descripcion</th>
+                            <th>Creado</th>
+                            <th>Acciones</th>
+                            
+                            
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php foreach($relatedFiles as $file): ?>
+                        <tr>
+                                                    
+                            <td><?php echo $file->description ?></td>
+                            <td><?php echo $file->date_created ?></td>
+                            <td>
+                                <a href="/related_files/<?php echo $file->file_id ?>" target="_blank" class="boton-verde-flex">Descargar</a>
+                            </td>
+                            
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            
+            <?php }else{ ?>
+
+                <p>No hay archivos relacionados.</p>
+
+            <?php } ?>
+
+            
+            <div class="boton_container">
+                <button 
+                    type="button"
+                    onclick="(()=> relatedModal(<?php echo $reporte->id; ?>))();"
+                    class="boton-verde-flex">Cargar Archivo</a>
+            </div>
+           
+        </fieldset>
+    </div>
+
     <div id="uploadModal" class="modal">
         <div class="modal-content-admin modal-content-admin-upload">
             <span class="close">&times;</span>
@@ -129,12 +194,41 @@
                     <p>Este sistema no efectua la firma digital del reporte medico. El mismo debe descargarse una vez creado, firmarse digitalmente con las credenciales y PIN asignado, y luego utilizar esta pantalla para subir el archivo <strong>YA FIRMADO</strong>.</p>
                     <p>Verificar correctamente que se este subiendo el archivo correspondiente y que los datos en el reporte sean correctos ya que, una vez subido, el reporte medico no admitira mas modificaciones.</p>
 
-                    <p>Usted esta subiendo el reporte firmado para:  <span class="paciente_notas"> <?php echo $reporte->patient_id->patient_name . ' ' . $reporte->patient_id->patient_lastname1 ?></span></p>
+                    <p>Usted esta subiendo el reporte firmado para:  <span class="paciente_notas"></span></p>
 
                     <input type="file" name="verified_report" id="verified_report" accept="application/pdf">
 
                     
                 </div>
+                <div class="contenedor_button_modal">
+                    <button type="submit">Subir Archivo</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    
+    <div id="relatedModal" class="modal">
+        <div class="modal-content-admin modal-content-admin-upload">
+            <span class="close" id="closeModal" >&times;</span>
+            <h2 class="heading_admin">Agregar Adjuntos</h2>
+                
+            <form  class="formulario_modal" method="POST" action='/reportes/expediente/adjuntar' enctype="multipart/form-data">
+                
+                <input type="hidden" name="file_reporte_id" id="file_reporte_id" value="">
+                
+                <div class="campo_modal two-col">
+                    <div class="campo_appointments">
+                        <label for="description">Descripcion:</label>
+                        <input type="text" id="description" name="description" placeholder="Descripcion del Adjunto"  >
+                    </div>
+
+                    <div class="campo_appointments">
+                        <label for="file_id">Archivo:</label>
+                        <input type="file" name="file_id" id="file_id" accept="application/pdf">
+                    </div>
+                </div>
+
                 <div class="contenedor_button_modal">
                     <button type="submit">Subir Archivo</button>
                 </div>

@@ -553,13 +553,12 @@ function enableForm(){
     
 }
 
-function mostrarModal(reporteId){
+function mostrarModal(reporteId, patientName){
     // Get the modal
     var modal = document.getElementById("uploadModal");
     if(modal){
         document.getElementById('verified_report').value = '';
-        if(modal){
-       
+        document.querySelector('.paciente_notas').textContent = patientName;
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
 
@@ -579,9 +578,40 @@ function mostrarModal(reporteId){
                 }
             }
         }
+}
+    
+
+
+function relatedModal(reporteId){
+    // Get the modal
+    var modal = document.getElementById("relatedModal");
+    if(modal){
+        document.getElementById('file_id').value = '';
+        if(modal){
+       
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("closeModal");
+        
+        // When the user clicks the span (button), open the modal
+        modal.style.display = "block";
+        
+        document.getElementById("file_reporte_id").value = reporteId;
+        // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                
+                modal.style.display = "none";
+            }
+
+        // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
     }
     
-    }
+}
 
 function mostrarModalPaciente(){
     // Get the modal

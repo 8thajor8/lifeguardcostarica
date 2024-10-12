@@ -16,7 +16,7 @@
         <div class="two-col">
             <div class="campo_appointments">
                 <label for="patient_name">Nombre:</label>
-                <p><?php echo s($paciente->patient_name); ?>" </p>
+                <p><?php echo s($paciente->patient_name); ?> </p>
             </div>
             
             <div class="campo_appointments">
@@ -42,6 +42,20 @@
                         $mes = $meses[(int)$date->format('m') - 1];
                         $anio = $date->format('Y');
                         echo ($dia . ' de ' . $mes . ' de ' . $anio); ?>
+                </p>
+            </div>
+
+            <div class="campo_appointments">
+                <label >Edad:</label>
+                <p>
+                     <?php 
+                    // Get the patient's birth date and calculate the age
+                    $dob = new DateTime($paciente->dob); // Convert dob to DateTime
+                    $today = new DateTime(); // Get today's date
+                    $age = $today->diff($dob)->y; // Calculate the age difference in years
+
+                    echo s($age); // Safely output the calculated age
+                    ?> años
                 </p>
             </div>
         </div>
@@ -139,7 +153,7 @@
                                     class=" status <?php echo intval($reporte->status) === 1 ? 'status-finished' : 'status-cancelled status_label' ?>"
                                     data-id="<?php echo $reporte->id; ?>" 
                                     <?php if($reporte->status === '0'){ ?>
-                                    onclick="(()=> mostrarModal(<?php echo $reporte->id; ?>))();"
+                                    onclick="(()=>mostrarModal(<?php echo $reporte->id; ?>, '<?php echo $reporte->patient_id->patient_name . ' '  . $reporte->patient_id->patient_lastname1 ?>'))();"
                                     <?php } ?>
                                 >
                                     <?php echo intval($reporte->status) === 1 ? 'FIRMADO' : 'NO FIRMADO' ?>
@@ -188,7 +202,7 @@
                     <p>Este sistema no efectua la firma digital del reporte medico. El mismo debe descargarse una vez creado, firmarse digitalmente con las credenciales y PIN asignado, y luego utilizar esta pantalla para subir el archivo <strong>YA FIRMADO</strong>.</p>
                     <p>Verificar correctamente que se este subiendo el archivo correspondiente y que los datos en el reporte sean correctos ya que, una vez subido, el reporte medico no admitira mas modificaciones.</p>
 
-                    <p>Usted esta subiendo el reporte firmado para:  <span class="paciente_notas"> <?php echo $reporte->patient_id->patient_name . ' ' . $reporte->patient_id->patient_lastname1 ?></span></p>
+                    <p>Usted esta subiendo el reporte firmado para:  <span class="paciente_notas"> </span></p>
 
                     <input type="file" name="verified_report" id="verified_report" accept="application/pdf">
 

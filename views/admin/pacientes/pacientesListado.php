@@ -27,6 +27,7 @@
                 <th>ID</th>
                 <th>Paciente</th>
                 <th>Fecha Nac.</th>
+                <th>Edad</th>
                 <th>ID</th>
                 <th>Acciones</th>
                 
@@ -48,8 +49,17 @@
                     $mes = $meses[(int)$date->format('m') - 1];
                     $anio = $date->format('Y');
                     echo ($dia . ' de ' . $mes . ' de ' . $anio); ?></td> 
+                <td>
+                    <?php 
+                    // Get the patient's birth date and calculate the age
+                    $dob = new DateTime($paciente->dob); // Convert dob to DateTime
+                    $today = new DateTime(); // Get today's date
+                    $age = $today->diff($dob)->y; // Calculate the age difference in years
+
+                    echo s($age); // Safely output the calculated age
+                    ?> años
+                </td>         
                 <td><?php echo $paciente->id_number ?></td>
-                                
                 <td>
                     <a href="/pacientes/expediente?id=<?php echo $paciente->id ?>" class="boton-verde-flex">Ver Expediente</a>
                 </td>

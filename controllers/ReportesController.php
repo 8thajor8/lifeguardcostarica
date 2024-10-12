@@ -3,12 +3,14 @@
 namespace Controllers;
 use MVC\Router;
 use Model\Titulo;
+use Model\Adjunto;
 use Model\Reporte;
 use Model\Usuario;
 use Model\Addendum;
 use Model\Paciente;
 use Model\PacienteReporte;
 use Helper\reportGenerator;
+
 
 
 
@@ -262,6 +264,7 @@ class ReportesController{
         $id = validarORedireccionar('/reportes/listado');
         $reporte = Reporte::find($id);
         $addendums = Addendum::belongsTo('reporte_id', $reporte->id);
+        $relatedFiles = Adjunto::belongsTo('reporte_id', $reporte->id);
 
         $resultado = $_GET['resultado'] ?? null;
         $listado = $_GET['listado'] ?? null;
@@ -282,6 +285,7 @@ class ReportesController{
             'resultado' =>$resultado,
             'reporte' => $reporte,
             'addendums' => $addendums,
+            'relatedFiles' => $relatedFiles,
             'listado' => $listado
             
         ]);
@@ -301,6 +305,9 @@ class ReportesController{
         $reporte->diagnostico_array = explode('|', $reporte->diagnostico);
         $reporte->plan_array = explode('|', $reporte->plan);
         $reporte->addendums = Addendum::belongsTo('reporte_id', $reporte->id);
+        $dob = new \DateTime($reporte->patient_id->dob); // Convert dob to DateTime
+        $today = new \DateTime(); // Get today's date
+        $reporte->age = $today->diff($dob)->y; // Calculate the age difference in years
         foreach($reporte->addendums as $addendum){
             $addendum->doctor = Usuario::find($addendum->doctor);
             $addendum->doctor->user_titulo = Titulo::find($addendum->doctor->user_titulo);
@@ -314,6 +321,55 @@ class ReportesController{
         return $reportPDF->generateReportPDF($reporte);
         }
     }
+
+    public static function adjuntar(){
+
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Assuming you have the database connection set up
+            $file['reporte_id'] = (int)$_POST['file_reporte_id'];
+            
+            $file['description'] = $_POST['description'];
+            
+            $file = new Adjunto($file);
+
+           
+            
+            $nombreFile = md5( uniqid( rand(), true) ) . ".pdf" ;
+            
+            
+            if($_FILES['file_id']['tmp_name']){
+            
+                $file->file_id = $nombreFile;
+            }
+            $errores = $file->validar();
+            
+             //Si no hay errores, ejecuto el query
+            if(empty($errores)){
+                $file->date_created = date('Y-m-d H:i:s');
+                
+                //Crear carpeta
+                if(!is_dir(CARPETA_RELATED_FILES)){
+                    mkdir(CARPETA_RELATED_FILES);
+                }
+    
+                if (move_uploaded_file($_FILES['file_id']['tmp_name'], CARPETA_RELATED_FILES . $nombreFile)) {
+                    
+                    $file->guardar();
+                                    
+                    header('Location: /reportes/expediente?id=' . $file->reporte_id . '&resultado=5');
+
+                } else {
+            // Handle the error for file upload failure
+                    $errores[] = "Error subiendo el archivo. Verifique y vuelva a intentarlo";
+                }
+                    
+            }
+    
+        };
+    
+    }
+
 
 }
 
